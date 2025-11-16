@@ -9,20 +9,22 @@ module.exports = {
     extend: {
       colors: {
         cyber: {
-          bg: '#070A0F',
-          'bg-dark': '#0B0B0F',
-          'bg-card': '#121218',
-          cyan: '#00ffff',
-          magenta: '#ff00ff',
-          green: '#00ff41',
-          'terminal-green': '#39ff14',
+          bg: '#0A0E27',
+          'bg-dark': '#050812',
+          'bg-card': '#0F1428',
+          cyan: '#00D9FF',
+          magenta: '#FF6EC7',
+          green: '#00FF41',
+          'terminal-green': '#00FF41',
           purple: '#9d00ff',
-          blue: '#0099ff',
+          blue: '#00D9FF',
+          'hot-pink': '#FF6EC7',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['VT323', 'monospace'],
+        sans: ['Azeret Mono', 'monospace'],
+        mono: ['Courier Prime', 'Courier New', 'monospace'],
       },
       animation: {
         'glitch': 'glitch 0.3s infinite',

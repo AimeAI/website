@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Terminal from "./components/Terminal";
 
 const projects = [
   {
@@ -315,18 +316,33 @@ export default function Home() {
               enhance strategic decision-making, and unlock unprecedented business value.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500 mb-12">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500 mb-8">
+              <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded">
                 <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span>Fortune 500 Trusted</span>
+                <span className="font-semibold text-slate-700">Fortune 500 Trusted</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded">
                 <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span>ISO 27001 Certified</span>
+                <span className="font-semibold text-slate-700">ISO 27001</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded">
                 <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span>Enterprise Grade Security</span>
+                <span className="font-semibold text-slate-700">SOC 2 Type II</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+              <div className="text-center p-4 bg-white border border-slate-200 rounded-lg">
+                <div className="text-3xl font-bold text-blue-600 mb-1">$3M+</div>
+                <div className="text-xs text-slate-600">Deals Closed</div>
+              </div>
+              <div className="text-center p-4 bg-white border border-slate-200 rounded-lg">
+                <div className="text-3xl font-bold text-blue-600 mb-1">50+</div>
+                <div className="text-xs text-slate-600">Industries</div>
+              </div>
+              <div className="text-center p-4 bg-white border border-slate-200 rounded-lg">
+                <div className="text-3xl font-bold text-blue-600 mb-1">48hr</div>
+                <div className="text-xs text-slate-600">Rapid Deploy</div>
               </div>
             </div>
 
@@ -338,7 +354,10 @@ export default function Home() {
       {/* Static overlay */}
       <div className={`static-overlay ${glitchStage >= 2 ? 'active' : ''}`}></div>
 
-    <main className="relative bg-cyber-bg overflow-hidden circuit-bg">
+    <main className="relative bg-cyber-bg overflow-hidden tactical-grid grain-overlay">
+      {/* Military-grade atmospheric layer */}
+      <div className="military-radar" />
+
       <AnimatedGrid />
       <FloatingOrbs />
       
@@ -397,7 +416,7 @@ export default function Home() {
               </span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight font-mono">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight font-display">
               <motion.span
                 className="block text-white glitch"
                 initial={{ x: -100, opacity: 0 }}
@@ -430,17 +449,32 @@ export default function Home() {
                 Ex-military, IATSE member, HBX grad. Building in public with 2,300+ watching the journey.
               </p>
               <motion.p
-                className="text-white font-semibold"
+                className="text-white font-semibold font-mono"
                 animate={{
-                  color: ['#ffffff', '#3b82f6', '#ffffff'],
+                  color: ['#ffffff', '#00D9FF', '#ffffff'],
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
                 }}
               >
-                All projects are live. Click in and play with them.
+                ↳ All projects are live. Click in and play with them.
               </motion.p>
+
+              <div className="flex flex-wrap gap-3 mt-4">
+                <span className="px-3 py-1 text-xs font-mono bg-cyber-bg-dark text-cyber-terminal-green border border-cyber-terminal-green/30 rounded">
+                  ✓ Ex-Military
+                </span>
+                <span className="px-3 py-1 text-xs font-mono bg-cyber-bg-dark text-cyber-cyan border border-cyber-cyan/30 rounded">
+                  ✓ $3M+ Sales Closed
+                </span>
+                <span className="px-3 py-1 text-xs font-mono bg-cyber-bg-dark text-cyber-magenta border border-cyber-magenta/30 rounded">
+                  ✓ HBX Certified
+                </span>
+                <span className="px-3 py-1 text-xs font-mono bg-cyber-bg-dark text-cyber-terminal-green border border-cyber-terminal-green/30 rounded">
+                  ✓ IATSE Member
+                </span>
+              </div>
             </motion.div>
 
             <motion.div 
@@ -545,12 +579,12 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="mb-16"
+            className="mb-16 measure-marks pl-8"
           >
-            <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
-              Live Projects — Click & Play
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4 font-display neon-cyan dossier-header">
+              &gt;_ LIVE_PROJECTS
             </h2>
-            <p className="text-slate-400 text-lg">
+            <p className="text-slate-400 text-lg font-mono classified-stamp">
               All deployed. All interactive. Built fast, shipped faster.
             </p>
           </motion.div>
@@ -566,16 +600,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.03,
-                  y: -8,
-                  transition: { duration: 0.2 }
-                }}
-                className="group relative block"
+                className="group relative block project-card"
               >
                 <div className="scanline absolute inset-0 pointer-events-none opacity-30 rounded-2xl"></div>
 
-                <div className="relative terminal-border-cyan bg-cyber-bg-card backdrop-blur-md rounded-2xl p-6 hologram transition-all duration-300">
+                <div className="relative terminal-border-cyan bg-cyber-bg-card backdrop-blur-md rounded-2xl p-6 hologram grain-overlay crt-scanlines pixel-corners">
                   <div className="flex items-center justify-between mb-4">
                     <motion.span
                       className={`px-3 py-1 text-xs font-mono font-bold rounded-full flex items-center gap-2 ${
@@ -585,7 +614,7 @@ export default function Home() {
                       }`}
                       whileHover={{ scale: 1.1 }}
                     >
-                      <span className={`w-1.5 h-1.5 rounded-full animate-blink ${
+                      <span className={`w-1.5 h-1.5 rounded-full status-indicator ${
                         project.status === 'Live' ? 'bg-cyber-terminal-green' : 'bg-cyber-cyan'
                       }`}></span>
                       &gt; {project.status.toUpperCase()}
@@ -595,7 +624,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-mono font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">
+                  <h3 className="text-2xl font-display font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">
                     [ {project.title.toUpperCase().replace(/ /g, '_')} ]
                   </h3>
 
@@ -664,23 +693,72 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Speed callout */}
+          {/* Capabilities Matrix - Defense Tech Style */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="mt-12 p-8 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-2xl"
+            className="mt-12 p-8 terminal-border-cyan bg-cyber-bg-card rounded-2xl grain-overlay"
           >
-            <div className="flex items-start gap-4">
-              <div className="text-4xl">⚡</div>
-              <div>
-                <h3 className="text-xl font-bold text-white mb-2">Why speed matters</h3>
-                <p className="text-slate-400">
-                  Most people spend weeks planning. I ship in hours, get real user feedback, then iterate.
-                  Nuit Blanche was built in 3 hours and launched same day. SceneScout processes 10,000+ events.
-                  SkyGuard hit 95% accuracy in 12 hours. Speed = more experiments = better learning = better products.
-                </p>
+            <h3 className="text-2xl font-display font-bold text-cyber-cyan mb-6 flex items-center gap-3">
+              <span className="neon-cyan">↳ SYSTEM_CAPABILITIES</span>
+            </h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="p-4 bg-cyber-bg-dark terminal-border rounded-lg">
+                <div className="text-3xl font-display text-cyber-terminal-green mb-1">7</div>
+                <div className="text-xs text-slate-500 font-mono uppercase">Live Systems</div>
               </div>
+              <div className="p-4 bg-cyber-bg-dark terminal-border rounded-lg">
+                <div className="text-3xl font-display text-cyber-cyan mb-1">95%</div>
+                <div className="text-xs text-slate-500 font-mono uppercase">ML Accuracy</div>
+              </div>
+              <div className="p-4 bg-cyber-bg-dark terminal-border rounded-lg">
+                <div className="text-3xl font-display text-cyber-magenta mb-1">3hrs</div>
+                <div className="text-xs text-slate-500 font-mono uppercase">Min Deploy</div>
+              </div>
+              <div className="p-4 bg-cyber-bg-dark terminal-border rounded-lg">
+                <div className="text-3xl font-display text-cyber-terminal-green mb-1">2.3K</div>
+                <div className="text-xs text-slate-500 font-mono uppercase">Followers</div>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-800 pt-6">
+              <h4 className="text-sm font-mono text-cyber-cyan mb-3 uppercase">↳ Tech Stack Overview</h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">AI/ML (TensorFlow, PyTorch)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">Next.js 14 + TypeScript</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">Python + FastAPI</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">Multi-Agent Systems</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">Video AI (Veo, Runway)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-cyber-terminal-green">●</span>
+                  <span className="text-slate-400">Real-time WebSockets</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-800 pt-6 mt-6">
+              <p className="text-slate-400 text-sm leading-relaxed">
+                <span className="text-cyber-cyan font-mono">&gt;</span> Most people spend weeks planning. I ship in hours, get real user feedback, then iterate.
+                Nuit Blanche: 3 hours → 2,000 users. SceneScout: 10,000+ events indexed. SkyGuard: 95% accuracy in 12 hours.
+                <span className="text-white font-semibold ml-2">Speed = more experiments = better learning.</span>
+              </p>
             </div>
           </motion.div>
         </div>
@@ -696,11 +774,11 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="mb-16 text-center"
           >
-            <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
-              Client Feedback
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4 font-display neon-magenta">
+              &gt;_ CLIENT_FEEDBACK
             </h2>
-            <p className="text-slate-400 text-lg">
-              What people say about working with me
+            <p className="text-slate-400 text-lg font-mono">
+              // What people say about working with me
             </p>
           </motion.div>
 
@@ -744,11 +822,11 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
-              The Journey
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4 font-display neon-green">
+              &gt;_ THE_JOURNEY
             </h2>
-            <p className="text-slate-400 text-lg mb-16">
-              Weird path, but it all connects.
+            <p className="text-slate-400 text-lg mb-16 font-mono">
+              // Weird path, but it all connects.
             </p>
 
             <div className="space-y-12">
@@ -806,8 +884,8 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-black text-white mb-6">
-              Let's Build Something
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-6 font-display neon-cyan">
+              &gt;_ LETS_BUILD_SOMETHING
             </h2>
 
             <p className="text-xl text-slate-400 mb-8">
@@ -900,6 +978,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Terminal Interface */}
+      <Terminal />
     </main>
     </>
   );

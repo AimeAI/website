@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:wght@400;700&family=Azeret+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 7, 9, 15;
-  --background-end-rgb: 11, 11, 15;
-  --neon-cyan: #00ffff;
-  --neon-magenta: #ff00ff;
-  --neon-green: #00ff41;
-  --terminal-green: #39ff14;
+  --background-start-rgb: 10, 14, 39;
+  --background-end-rgb: 5, 8, 18;
+  --neon-cyan: #00D9FF;
+  --neon-magenta: #FF6EC7;
+  --neon-green: #00FF41;
+  --terminal-green: #00FF41;
+  --hot-pink: #FF6EC7;
+  --electric-blue: #00D9FF;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Azeret Mono', 'Courier New', monospace;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -27,7 +29,13 @@ body {
 
 /* Monospace for code/terminal elements */
 .font-mono {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+}
+
+/* Display font for headlines */
+.font-display {
+  font-family: 'VT323', monospace;
+  letter-spacing: 0.05em;
 }
 
 /* Glitch effect on hover */
@@ -478,4 +486,515 @@ body {
 .corporate-text {
   color: #1e293b;
   font-family: 'Inter', sans-serif;
+}
+
+/* Grain texture overlay */
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ASCII border decorations */
+.ascii-border {
+  position: relative;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.ascii-border::before {
+  content: '┌─────────────────────────────────────────────────────────┐';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  color: var(--terminal-green);
+  opacity: 0.4;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ascii-border::after {
+  content: '└─────────────────────────────────────────────────────────┘';
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  color: var(--terminal-green);
+  opacity: 0.4;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Brutalist measurement marks */
+.measure-marks {
+  position: relative;
+}
+
+.measure-marks::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--electric-blue) 0px,
+    var(--electric-blue) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  opacity: 0.2;
+}
+
+.measure-marks::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--hot-pink) 0px,
+    var(--hot-pink) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  opacity: 0.2;
+}
+
+/* Grid overlay for brutalist aesthetic */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px;
+}
+
+/* CRT scanline effect - enhanced */
+.crt-scanlines {
+  position: relative;
+}
+
+.crt-scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 65, 0.03) 0px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pixelated corner accents */
+.pixel-corners {
+  position: relative;
+}
+
+.pixel-corners::before,
+.pixel-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--terminal-green);
+  opacity: 0.4;
+}
+
+.pixel-corners::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+  box-shadow:
+    2px 0 0 0 var(--terminal-green),
+    0 2px 0 0 var(--terminal-green),
+    2px 2px 0 0 var(--terminal-green);
+}
+
+.pixel-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+  box-shadow:
+    -2px 0 0 0 var(--terminal-green),
+    0 -2px 0 0 var(--terminal-green),
+    -2px -2px 0 0 var(--terminal-green);
+}
+
+/* Terminal Command Interface */
+.terminal-interface {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: rgba(5, 8, 18, 0.95);
+  border-top: 2px solid var(--terminal-green);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  font-family: 'Courier Prime', monospace;
+  box-shadow: 0 -10px 50px rgba(0, 255, 65, 0.2);
+}
+
+.terminal-interface.active {
+  transform: translateY(0);
+}
+
+.terminal-header {
+  padding: 12px 20px;
+  background: rgba(0, 255, 65, 0.1);
+  border-bottom: 1px solid var(--terminal-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.terminal-output {
+  padding: 20px;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--terminal-green);
+}
+
+.terminal-input-area {
+  padding: 12px 20px;
+  background: rgba(0, 255, 65, 0.05);
+  border-top: 1px solid var(--terminal-green);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terminal-prompt {
+  color: var(--hot-pink);
+  font-weight: bold;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--terminal-green);
+  font-family: 'Courier Prime', monospace;
+  font-size: 14px;
+  outline: none;
+}
+
+.terminal-input::placeholder {
+  color: rgba(0, 255, 65, 0.3);
+}
+
+.terminal-line {
+  margin-bottom: 8px;
+}
+
+.terminal-command {
+  color: var(--electric-blue);
+}
+
+.terminal-error {
+  color: #ff6b6b;
+}
+
+.terminal-success {
+  color: var(--terminal-green);
+}
+
+/* Enhanced glowing effects */
+.glow-strong {
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 80px currentColor;
+}
+
+.glow-box {
+  box-shadow:
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    inset 0 0 10px rgba(0, 255, 65, 0.1);
+  border: 1px solid currentColor;
+}
+
+/* HUD geometric elements */
+.hud-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--electric-blue);
+  opacity: 0.6;
+}
+
+.hud-corner.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corner.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.hud-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.hud-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Animated border scan */
+@keyframes border-scan {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
+  }
+  25% {
+    clip-path: polygon(100% 0, 100% 100%, calc(100% - 2px) 100%, calc(100% - 2px) 0);
+  }
+  50% {
+    clip-path: polygon(100% 100%, 0 100%, 0 calc(100% - 2px), 100% calc(100% - 2px));
+  }
+  75% {
+    clip-path: polygon(0 100%, 0 0, 2px 0, 2px 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
+  }
+}
+
+.border-scan {
+  position: relative;
+}
+
+.border-scan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--electric-blue);
+  animation: border-scan 4s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Data stream effect */
+@keyframes data-stream {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.data-stream {
+  position: fixed;
+  top: 0;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--terminal-green), transparent);
+  animation: data-stream 3s linear infinite;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Hexagon grid background */
+.hex-grid {
+  background-image:
+    radial-gradient(circle, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Military-Grade Atmospheric Effects */
+.military-radar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255, 110, 199, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.classified-stamp {
+  position: relative;
+  padding-left: 60px;
+}
+
+.classified-stamp::before {
+  content: 'CLASSIFIED';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-5deg);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+  padding: 4px 8px;
+  opacity: 0.3;
+  font-family: 'Courier Prime', monospace;
+}
+
+/* Enhanced project card hover */
+.project-card {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(0, 217, 255, 0.2),
+    0 0 0 1px rgba(0, 217, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Staggered fade-in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1 { animation: fadeInUp 0.8s ease-out 0.1s both; }
+.stagger-2 { animation: fadeInUp 0.8s ease-out 0.2s both; }
+.stagger-3 { animation: fadeInUp 0.8s ease-out 0.3s both; }
+.stagger-4 { animation: fadeInUp 0.8s ease-out 0.4s both; }
+.stagger-5 { animation: fadeInUp 0.8s ease-out 0.5s both; }
+.stagger-6 { animation: fadeInUp 0.8s ease-out 0.6s both; }
+
+/* Custom cursor for cyberpunk feel */
+body {
+  cursor: crosshair;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+/* Redacted text effect */
+.redacted {
+  position: relative;
+  color: transparent;
+  background: #000;
+  user-select: none;
+}
+
+.redacted::selection {
+  background: #000;
+}
+
+/* Status indicator pulse */
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.status-indicator {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Tactical grid overlay */
+.tactical-grid {
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 110, 199, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 110, 199, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+/* Dossier header style */
+.dossier-header {
+  position: relative;
+  border-left: 3px solid var(--electric-blue);
+  padding-left: 20px;
+  margin-left: -23px;
+}
+
+.dossier-header::before {
+  content: '█';
+  position: absolute;
+  left: -12px;
+  top: 0;
+  color: var(--electric-blue);
+  font-size: 8px;
+  animation: blink 1.5s infinite;
 }
