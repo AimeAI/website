@@ -236,3 +236,246 @@ body {
 .crt-flicker {
   animation: flicker 0.15s infinite;
 }
+
+/* Fight Club Reveal - Analog TV Failure */
+
+/* Heavy RGB chromatic aberration */
+@keyframes rgb-distort {
+  0% {
+    text-shadow: 0 0 0 red, 0 0 0 cyan;
+    transform: translate(0);
+  }
+  10% {
+    text-shadow: -5px 0 0 red, 5px 0 0 cyan;
+    transform: translate(3px, -2px);
+  }
+  20% {
+    text-shadow: 8px 0 0 red, -8px 0 0 cyan;
+    transform: translate(-2px, 3px);
+  }
+  30% {
+    text-shadow: -10px 0 0 red, 10px 0 0 cyan, 0 5px 0 lime;
+    transform: translate(5px, -5px) skew(2deg);
+  }
+  40% {
+    text-shadow: 15px 0 0 red, -15px 0 0 cyan;
+    transform: translate(-8px, 8px) skew(-3deg);
+  }
+  50% {
+    text-shadow: -20px 0 0 red, 20px 0 0 cyan, 0 -10px 0 lime;
+    transform: translate(10px, -10px) skew(5deg);
+  }
+  100% {
+    text-shadow: 0 0 0 transparent;
+    opacity: 0;
+    transform: translate(0) skew(0);
+  }
+}
+
+/* Screen burn/distortion */
+@keyframes screen-burn {
+  0% {
+    filter: contrast(1) brightness(1);
+    opacity: 1;
+  }
+  20% {
+    filter: contrast(3) brightness(2);
+  }
+  40% {
+    filter: contrast(0.5) brightness(0.3) saturate(0);
+  }
+  60% {
+    filter: contrast(5) brightness(4) invert(1);
+  }
+  80% {
+    filter: contrast(0) brightness(0);
+    opacity: 0.2;
+  }
+  100% {
+    filter: contrast(0) brightness(0);
+    opacity: 0;
+  }
+}
+
+/* Pixel displacement/tearing */
+@keyframes pixel-tear {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  15% {
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 35%);
+    transform: translateY(0);
+  }
+  30% {
+    clip-path: polygon(0 35%, 100% 30%, 100% 65%, 0 70%);
+    transform: translateY(10px) translateX(-20px);
+  }
+  45% {
+    clip-path: polygon(0 70%, 100% 65%, 100% 85%, 0 90%);
+    transform: translateY(-15px) translateX(15px);
+  }
+  60% {
+    clip-path: polygon(0 90%, 100% 85%, 100% 100%, 0 100%);
+    transform: translateY(20px) translateX(-10px);
+  }
+  100% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    opacity: 0;
+  }
+}
+
+/* Static noise overlay */
+@keyframes static-noise {
+  0%, 100% {
+    background-position: 0 0;
+    opacity: 0.8;
+  }
+  10% { background-position: -5% -10%; opacity: 0.9; }
+  20% { background-position: -15% 5%; opacity: 0.7; }
+  30% { background-position: 7% -25%; opacity: 0.95; }
+  40% { background-position: -10% 20%; opacity: 0.85; }
+  50% { background-position: 15% 5%; opacity: 0.75; }
+  60% { background-position: -20% -15%; opacity: 0.9; }
+  70% { background-position: 10% 25%; opacity: 0.8; }
+  80% { background-position: -5% -10%; opacity: 0.95; }
+  90% { background-position: 20% 10%; opacity: 0.7; }
+}
+
+/* TV tube horizontal roll */
+@keyframes horizontal-roll {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  75% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+/* Chaotic multi-directional tear effect - reveals underneath */
+@keyframes chaotic-tear {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  20% {
+    clip-path: polygon(
+      0 0, 100% 0, 100% 15%, 95% 18%,
+      90% 15%, 85% 20%, 15% 20%, 10% 15%, 5% 18%, 0 15%
+    );
+  }
+  40% {
+    clip-path: polygon(
+      5% 18%, 95% 18%, 100% 35%, 90% 40%,
+      85% 35%, 80% 42%, 20% 42%, 15% 35%, 10% 40%, 0 35%
+    );
+  }
+  60% {
+    clip-path: polygon(
+      10% 40%, 90% 40%, 95% 60%, 85% 65%,
+      80% 60%, 75% 68%, 25% 68%, 20% 60%, 15% 65%, 5% 60%
+    );
+  }
+  80% {
+    clip-path: polygon(
+      15% 65%, 85% 65%, 90% 85%, 80% 90%,
+      70% 85%, 60% 92%, 40% 92%, 30% 85%, 20% 90%, 10% 85%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      20% 90%, 80% 90%, 100% 100%, 100% 100%,
+      100% 100%, 100% 100%, 0 100%, 0 100%, 0 100%, 0 100%
+    );
+    opacity: 0;
+  }
+}
+
+/* Aggressive RGB split - stays in place but glitches out */
+@keyframes aggressive-rgb {
+  0% {
+    text-shadow: 0 0 0 red, 0 0 0 cyan;
+    filter: brightness(1);
+  }
+  10% {
+    text-shadow: -8px 0 0 red, 8px 0 0 cyan, 0 8px 0 lime;
+    filter: brightness(1.5);
+  }
+  20% {
+    text-shadow: 12px 0 0 red, -12px 0 0 cyan, 0 -12px 0 lime;
+    filter: brightness(0.5);
+  }
+  30% {
+    text-shadow: -15px 0 0 red, 15px 0 0 cyan, 15px 15px 0 lime;
+    filter: brightness(2) contrast(3);
+  }
+  40% {
+    text-shadow: 20px 0 0 red, -20px 0 0 cyan, -20px 20px 0 lime;
+    filter: brightness(0.3) contrast(0.5);
+  }
+  60% {
+    text-shadow: -25px 0 0 red, 25px 0 0 cyan, 25px -25px 0 lime;
+    filter: brightness(3) invert(0.5);
+  }
+  80% {
+    text-shadow: 30px 0 0 red, -30px 0 0 cyan, 0 30px 0 lime;
+    filter: brightness(0.1) contrast(5);
+  }
+  100% {
+    text-shadow: 0 0 0 transparent;
+    opacity: 0;
+    filter: brightness(0);
+  }
+}
+
+/* Apply glitch effects */
+.glitch-heavy {
+  animation: aggressive-rgb 0.4s steps(3) forwards;
+}
+
+.burn-out {
+  animation: screen-burn 0.6s ease-out forwards;
+}
+
+.pixel-tear {
+  animation: chaotic-tear 0.5s steps(4) forwards;
+}
+
+.static-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+  background-size: 100% 100%, 100% 100%;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.static-overlay.active {
+  animation: static-noise 0.2s infinite steps(10);
+}
+
+.horizontal-distort {
+  animation: horizontal-roll 0.5s ease-in-out forwards;
+}
+
+/* Corporate mode styles */
+.corporate-mode {
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  transition: none;
+}
+
+.corporate-text {
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
+}

@@ -218,11 +218,21 @@ function FloatingOrbs() {
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [revealed, setRevealed] = useState(false);
+  const [scrollCount, setScrollCount] = useState(0);
+  const [glitchStage, setGlitchStage] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
   const { scrollY } = useScroll();
-  
+
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.8]);
+
+  // Fix hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -232,7 +242,102 @@ export default function Home() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Track wheel events to trigger glitch
+  useEffect(() => {
+    let scrollEvents = 0;
+    const handleWheel = (e: WheelEvent) => {
+      if (!revealed) {
+        scrollEvents++;
+        setScrollCount(scrollEvents);
+      }
+    };
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [revealed]);
+
+  // 5-second glitch sequence
+  useEffect(() => {
+    if (scrollCount === 2 && !revealed) {
+      setTimeout(() => setGlitchStage(1), 300);
+      setTimeout(() => setGlitchStage(0), 600);
+      setTimeout(() => setGlitchStage(1), 1200);
+      setTimeout(() => setGlitchStage(0), 1500);
+      setTimeout(() => setGlitchStage(2), 2500);
+      setTimeout(() => setGlitchStage(0), 2900);
+      setTimeout(() => setGlitchStage(1), 3500);
+      setTimeout(() => setGlitchStage(2), 3800);
+      setTimeout(() => setGlitchStage(3), 4500);
+      setTimeout(() => {
+        setRevealed(true);
+        setGlitchStage(0);
+      }, 5000);
+    }
+  }, [scrollCount, revealed]);
+
+  // Disable scroll during corporate phase
+  useEffect(() => {
+    if (!revealed) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [revealed]);
+
+  if (!mounted) return null;
+
   return (
+    <>
+      {/* Corporate overlay */}
+      {!revealed && (
+        <div className={`fixed inset-0 z-[9999] corporate-mode flex items-center justify-center overflow-hidden ${
+          glitchStage === 1 ? 'glitch-heavy' :
+          glitchStage === 2 ? 'pixel-tear burn-out' :
+          glitchStage === 3 ? 'pixel-tear burn-out horizontal-distort' : ''
+        }`}>
+          <div className="max-w-4xl mx-auto text-center px-6">
+            <div className="mb-6 inline-block px-6 py-2 bg-blue-600/10 border border-blue-600/20 rounded-full">
+              <p className="text-sm text-blue-600 font-semibold">Transforming Business Through Innovation</p>
+            </div>
+
+            <h1 className="text-6xl md:text-8xl font-bold corporate-text mb-6 tracking-tight">
+              AIME Intelligence
+            </h1>
+
+            <p className="text-2xl md:text-3xl text-slate-700 font-light mb-4 leading-relaxed">
+              Enterprise AI Solutions for the Modern Enterprise
+            </p>
+
+            <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+              Leveraging cutting-edge artificial intelligence to drive operational excellence,
+              enhance strategic decision-making, and unlock unprecedented business value.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500 mb-12">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <span>Fortune 500 Trusted</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <span>ISO 27001 Certified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <span>Enterprise Grade Security</span>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-400 animate-pulse">Scroll to explore our solutions →</p>
+          </div>
+        </div>
+      )}
+
+      {/* Static overlay */}
+      <div className={`static-overlay ${glitchStage >= 2 ? 'active' : ''}`}></div>
+
     <main className="relative bg-cyber-bg overflow-hidden circuit-bg">
       <AnimatedGrid />
       <FloatingOrbs />
@@ -311,20 +416,20 @@ export default function Home() {
               </motion.span>
             </h1>
             
-            <motion.div 
-              className="space-y-4 text-lg text-slate-400 mb-12 max-w-2xl"
+            <motion.div
+              className="space-y-4 text-lg mb-12 max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <p>
+              <p className="text-slate-400">
                 Solo builder experimenting with autonomous systems and wild ideas.
               </p>
               <p className="text-slate-500">
-                15 years directing films → closed $3M+ in enterprise sales → now building AI prototypes. 
+                15 years directing films → closed $3M+ in enterprise sales → now building AI prototypes.
                 Ex-military, IATSE member, HBX grad. Building in public with 2,300+ watching the journey.
               </p>
-              <motion.p 
+              <motion.p
                 className="text-white font-semibold"
                 animate={{
                   color: ['#ffffff', '#3b82f6', '#ffffff'],
@@ -386,16 +491,6 @@ export default function Home() {
                     Blog
                   </motion.span>
                 </Link>
-                <span>•</span>
-                <motion.a
-                  href="https://manimehramooz.wixsite.com/torontofilmstudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                >
-                  Film Work
-                </motion.a>
                 <span>•</span>
                 <motion.a
                   href="https://vimeo.com/1078851097"
@@ -581,9 +676,9 @@ export default function Home() {
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">Why speed matters</h3>
                 <p className="text-slate-400">
-                  Most people spend weeks planning. I ship in hours, get real user feedback, then iterate. 
-                  Nuit Blanche was built in 3 hours and launched same day. SceneScout processes 10,000+ events. 
-                  SkyGuard hit 95% accuracy in 2 weeks. Speed = more experiments = better learning = better products.
+                  Most people spend weeks planning. I ship in hours, get real user feedback, then iterate.
+                  Nuit Blanche was built in 3 hours and launched same day. SceneScout processes 10,000+ events.
+                  SkyGuard hit 95% accuracy in 12 hours. Speed = more experiments = better learning = better products.
                 </p>
               </div>
             </div>
@@ -714,7 +809,7 @@ export default function Home() {
             <h2 className="text-3xl lg:text-4xl font-black text-white mb-6">
               Let's Build Something
             </h2>
-            
+
             <p className="text-xl text-slate-400 mb-8">
               Open to consulting, technical advisory, or working on ambitious projects that need rapid prototyping.
             </p>
@@ -806,5 +901,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </>
   );
 }
