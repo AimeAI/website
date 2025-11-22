@@ -2581,6 +2581,14 @@
 
                 State.log('/// CRISIS MODE ACTIVATED: RAPID USER BEHAVIOR DETECTED');
 
+                // Scroll to calendar for booking
+                setTimeout(() => {
+                    const calGrid = document.getElementById('cal-grid');
+                    if (calGrid) {
+                        calGrid.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }
+                }, 500);
+
                 // Reset counters
                 this.clickCount = 0;
                 this.scrollCount = 0;
