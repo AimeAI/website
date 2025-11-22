@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset AIME</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; padding: 40px; max-width: 800px; margin: 0 auto; }
+        button { background: #0f0; color: #000; padding: 20px; font-size: 1.2rem; cursor: pointer; border: none; width: 100%; max-width: 300px; }
+        button:active { transform: scale(0.98); }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            body { padding: 30px 20px; }
+            h1 { font-size: 1.5rem; }
+            p { font-size: 0.9rem; }
+            button { padding: 16px; font-size: 1rem; }
+            pre { font-size: 0.7rem !important; overflow-x: auto; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 20px 15px; }
+            h1 { font-size: 1.3rem; }
+            button { padding: 14px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>/// AIME SYSTEM RESET</h1>
+    <p>Click below to clear all behavioral tracking data and return to default state.</p>
+    <button onclick="reset()">RESET ALL DATA</button>
+    <div id="status"></div>
+    
+    <script>
+        function reset() {
+            try {
+                // Step 1: Clear everything
+                localStorage.clear();
+
+                // Step 2: Verify it's actually cleared
+                const check = localStorage.getItem('aime_dossier');
+                if (check === null) {
+                    document.getElementById('status').innerHTML = '<p style="color:#0f0;">✓ All data cleared successfully!<br>Redirecting in 2 seconds...</p>';
+
+                    // Step 3: Redirect after a longer delay to ensure localStorage is flushed
+                    setTimeout(() => {
+                        window.location.href = 'index.html?reset=1&t=' + Date.now();
+                    }, 2000);
+                } else {
+                    document.getElementById('status').innerHTML = '<p style="color:red;">Warning: Data may not have cleared. Try manually.</p>';
+                }
+            } catch(e) {
+                document.getElementById('status').innerHTML = '<p style="color:red;">Error: ' + e.message + '</p>';
+            }
+        }
+
+        // Auto-display current state for debugging
+        window.onload = function() {
+            try {
+                const dossier = localStorage.getItem('aime_dossier');
+                if (dossier) {
+                    const data = JSON.parse(dossier);
+                    document.getElementById('status').innerHTML = '<pre style="color:#ff0;font-size:0.8rem;">Current State:\n' + JSON.stringify(data, null, 2) + '</pre>';
+                } else {
+                    document.getElementById('status').innerHTML = '<p style="color:#0f0;">No data stored. Already clean.</p>';
+                }
+            } catch(e) {
+                document.getElementById('status').innerHTML = '<p style="color:#666;">LocalStorage blocked or empty</p>';
+            }
+        };
+    </script>
+</body>
+</html>

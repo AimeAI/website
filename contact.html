@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Uplink | Mani</title>
+    <meta name="robots" content="noindex"> 
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --primary: #00FF41;
+            --text-main: #e6edf3;
+            --text-muted: #9ca3af;  
+            --mono-font: 'JetBrains Mono', monospace;
+            --header-font: 'Space Grotesk', sans-serif;
+            --border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        body { background: var(--bg); color: var(--text-main); font-family: var(--header-font); padding: 40px 20px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary); letter-spacing: -1px; }
+        p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
+        
+        .contact-method { 
+            border: var(--border); padding: 25px; margin-bottom: 20px; 
+            background: rgba(255,255,255,0.02); transition: 0.3s;
+        }
+        .contact-method:hover { border-color: var(--primary); transform: translateX(5px); }
+        .contact-method h3 { font-family: var(--mono-font); font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted); }
+        
+        a.contact-link { color: var(--text-main); text-decoration: none; font-size: 1.2rem; font-weight: bold; }
+        a.contact-link:hover { color: var(--primary); }
+        
+        .back-link { display: inline-block; margin-bottom: 40px; color: var(--text-muted); text-decoration: none; font-family: var(--mono-font); font-size: 0.8rem; }
+        .back-link:hover { color: var(--primary); }
+
+        .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 9998; background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%); background-size: 100% 4px; opacity: 0.6; }
+
+        .highlight { color: #fff; font-weight: bold; }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            body { padding: 30px 16px; }
+            h1 { font-size: 2rem; }
+            p { font-size: 1rem; }
+            .contact-method { padding: 20px; }
+            a.contact-link { font-size: 1rem; word-break: break-all; }
+            .contact-method:hover { transform: none; }
+            .scanlines { opacity: 0.3; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.7rem; }
+            .contact-method { padding: 15px; }
+            a.contact-link { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <a href="index.html" class="back-link">&larr; RETURN TO COMMAND</a>
+    
+    <h1>Secure Uplink.</h1>
+
+    <p>Current Status: <span class="highlight">OPERATIONAL WINDOW OPEN FOR DECEMBER</span>. Priority access granted to Defense & Logistics sectors.</p>
+
+    <div class="contact-method" style="border-color: var(--primary); background: rgba(0,255,65,0.02);">
+        <h3 style="color: var(--primary);">// PRIORITY UPLINK</h3>
+        <p style="font-size: 0.8rem; margin-bottom: 10px; color: var(--text-muted);">
+            My operational bandwidth is strictly limited to ensure mission success.
+        </p>
+        <a href="mailto:mani@aimeintelligence.com?subject=AIME Project: Ready to Deploy" class="contact-link">
+            Request Deployment Slot >>
+        </a>
+    </div>
+    
+    <div class="contact-method">
+        <h3>// LINKEDIN</h3>
+        <a href="https://www.linkedin.com/in/manimehramooz" target="_blank" class="contact-link">linkedin.com/in/manimehramooz</a>
+    </div>
+    
+    <div class="contact-method">
+        <h3>// CODE REPOSITORY</h3>
+        <a href="https://github.com/AimeAI" target="_blank" class="contact-link">github.com/AimeAI</a>
+    </div>
+    
+    <div style="margin-top: 50px; border-top: 1px dashed var(--text-muted); padding-top: 30px;">
+        <p style="font-size: 0.9rem; font-family: var(--mono-font);">
+            <strong style="color: var(--primary);">REQUIRED INTEL:</strong><br>
+            1. What do you need built?<br>
+            2. What is your timeline?<br>
+            3. Confirm budget range ($6.5k - $9.8k)
+        </p>
+        <p style="font-size: 0.8rem; color: #FFB000; margin-top: 10px;">
+            * NOTE: Waitlist available for standard rates. Surge requests bypass the queue.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>VET_LINK OPS | Operational Case Study</title>
+    <meta name="description" content="Declassified strategy: Connecting military assets to civilian infrastructure sectors.">
+    <meta name="robots" content="noindex"> 
+
+    <!-- ANALYTICS -->
+    <script defer data-domain="aimeintelligence.com" src="https://plausible.io/js/script.js"></script>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CHAMELEON SYSTEM: AUTHORITY VARIANT (AMBER/GOLD) --- */
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --primary: #FFB000; /* Amber */
+            --secondary: #FFD700; /* Gold */
+            --alert: #FF4500; /* Orange Red */
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --mono-font: 'JetBrains Mono', monospace;
+            --header-font: 'Space Grotesk', sans-serif;
+        }
+
+        /* BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--header-font); background: var(--bg); color: var(--text-main); line-height: 1.6; }
+
+        /* FX */
+        .scanlines {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+            background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%);
+            background-size: 100% 4px; opacity: 0.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* NAV */
+        header { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-bottom: 60px; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-family: var(--mono-font); font-size: 0.8rem; }
+        .back-link:hover { color: var(--primary); }
+
+        /* HERO */
+        .mission-badge { 
+            display: inline-block; border: 1px solid var(--primary); color: var(--primary);
+            padding: 5px 10px; font-family: var(--mono-font); font-size: 0.7rem; margin-bottom: 20px;
+        }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 30px; }
+        
+        /* STATS */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-bottom: 60px; }
+        .stat-box { border: 1px solid rgba(255,255,255,0.1); padding: 20px; background: rgba(255,255,255,0.02); }
+        .stat-label { font-family: var(--mono-font); font-size: 0.65rem; color: var(--text-muted); display: block; margin-bottom: 5px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+
+        /* SECTIONS */
+        .intel-section { margin-bottom: 60px; }
+        h2 { font-family: var(--mono-font); font-size: 1.2rem; color: var(--primary); margin-bottom: 20px; border-left: 3px solid var(--primary); padding-left: 15px; }
+        h3 { font-size: 1rem; margin-bottom: 10px; color: #fff; }
+        p { margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem; }
+        
+        /* ROADMAP LIST */
+        .roadmap-list { list-style: none; border-left: 1px solid var(--text-muted); padding-left: 20px; }
+        .roadmap-item { margin-bottom: 30px; position: relative; }
+        .roadmap-item::before {
+            content: ''; position: absolute; left: -25px; top: 6px; width: 9px; height: 9px;
+            background: var(--bg); border: 1px solid var(--primary); transform: rotate(45deg);
+        }
+        .phase-tag { font-family: var(--mono-font); font-size: 0.7rem; color: var(--primary); margin-bottom: 5px; display: block; }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #000; border: 1px solid var(--text-muted); padding: 20px;
+            font-family: var(--mono-font); font-size: 0.75rem; color: var(--text-main);
+            overflow-x: auto; margin: 20px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        /* FOOTER CTA */
+        .cta-box { text-align: center; padding: 60px; border: 1px dashed var(--primary); margin-top: 60px; }
+        .btn-primary {
+            background: var(--primary); color: #000; padding: 15px 30px; text-decoration: none;
+            font-weight: 700; font-family: var(--mono-font); display: inline-block;
+        }
+        .btn-primary:hover { box-shadow: 0 0 20px var(--primary); }
+        
+        .telemetry-node { position: fixed; bottom: 20px; right: 20px; z-index: 9000; font-family: var(--mono-font); font-size: 0.65rem; color: var(--text-muted); pointer-events: none; mix-blend-mode: exclusion; }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="telemetry-node">LOGISTICS NODE // LVL 3</div>
+
+    <div class="container">
+        <header>
+            <a href="index.html#calendar-section" class="back-link" style="color: var(--primary); border-bottom: 1px solid var(--primary);">&lt;&lt; SECURE ALLOCATION</a>
+        </header>
+
+        <main>
+            <div class="mission-badge" data-semantic="AUTHORITY">DECLASSIFIED: STRATEGIC WHITE PAPER</div>
+            
+            <h1 data-semantic="AUTHORITY">
+                Vet_Link Ops:<br>
+                <span style="color: var(--primary);">Human Capital Logistics.</span>
+            </h1>
+
+            <!-- 1. EXECUTIVE SUMMARY -->
+            <div class="intel-section" style="border: 1px solid var(--text-muted); padding: 20px; background: rgba(255,255,255,0.01);">
+                <h3 style="font-family: var(--mono-font); font-size: 0.8rem; color: var(--alert); margin-bottom: 10px;">/// SITUATION REPORT (SITREP)</h3>
+                <p>
+                    Vet_Link Ops is not a "job board." It is a <strong>Human Capital Logistics Platform</strong> designed to bridge the semantic gap between Military Doctrine and Corporate Infrastructure.
+                </p>
+                <p style="margin-bottom: 0;">
+                    While generic platforms (Indeed/LinkedIn) rely on keyword matching that fails veterans, Vet_Link utilizes a <strong>Doctrine Translation Layer</strong> to map MOS (Military Occupational Specialties) directly to sector needs in Defense, Policing, and Heavy Industry.
+                </p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box" style="border-color: var(--primary);">
+                    <span class="stat-label">EMPLOYER NODES</span>
+                    <span class="stat-val">237</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">POLICE UNITS</span>
+                    <span class="stat-val">62</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">URL VERIFICATION</span>
+                    <span class="stat-val">100%</span>
+                </div>
+            </div>
+
+            <!-- 2. WHY VETERANS NEED THIS -->
+            <div class="intel-section" data-semantic="AUTHORITY">
+                <h2>/// THE PROBLEM: SEMANTIC FRICTION</h2>
+                <p>
+                    <strong>The Issue:</strong> A Sergeant Major with 20 years of logistics experience applies for a "Project Manager" role. The HR algorithm rejects him because his resume says "Squadron Leader" instead of "Team Lead."
+                </p>
+                <p>
+                    <strong>The Waste:</strong> Thousands of veterans with <strong>Security Clearances (Secret/Top Secret)</strong> are working entry-level jobs because their clearance value isn't indexed by civilian boards.
+                </p>
+                <p>
+                    <strong>The Solution:</strong> Vet_Link Ops indexes by <strong>Clearance Level</strong> and <strong>Sector Competency</strong>, ensuring high-value assets are deployed where they are needed most.
+                </p>
+            </div>
+
+            <!-- 3. OPERATIONAL GUIDE -->
+            <div class="intel-section" data-semantic="TECH">
+                <h2>/// OPERATIONAL GUIDE (SOP)</h2>
+                <div style="margin-bottom: 30px;">
+                    <h3>1. Sector Reconnaissance</h3>
+                    <p class="text-xs">Browse pre-vetted employers by strategic sector. We do not scrape generic listings. Every employer is verified as "Veteran-Ready."</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <h3>2. Tactical Filtering</h3>
+                    <p class="text-xs">Filter specifically by <strong>Clearance Level</strong> (Reliability, Secret, Top Secret). This is the only filter that matters for Defense Contractors.</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <h3>3. The MOS Translator</h3>
+                    <p class="text-xs">Input your Military Rank/Trade. The system outputs the Civilian Sector equivalent. (e.g., "Infantry Section Commander" → "Operations Supervisor").</p>
+                </div>
+            </div>
+
+            <!-- 4. REALISTIC GROWTH TARGETS (UPDATED) -->
+            <div class="intel-section">
+                <h2>/// MISSION OBJECTIVES (REALISTIC)</h2>
+                
+                <!-- Revised Grid -->
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">TOTAL MARKET</span>
+                        <span class="stat-val">40k</span>
+                        <span class="stat-label" style="margin-top:5px;">POTENTIAL USERS</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">YEAR 3 GOAL</span>
+                        <span class="stat-val">5,000</span>
+                        <span class="stat-label" style="margin-top:5px;">ACTIVE USERS</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">SUSTAINABILITY</span>
+                        <span class="stat-val">$60k</span>
+                        <span class="stat-label" style="margin-top:5px;">ANNUAL REVENUE</span>
+                    </div>
+                </div>
+
+                <!-- Market Reality -->
+                <div style="margin-bottom: 30px;">
+                    <h3>The Market Reality</h3>
+                    <p class="text-xs">
+                        <strong>Canadian Military Releases:</strong> ~4,000 veterans/year seeking civilian employment.
+                        <br>- Medical releases: ~1,500/year (priority for services)
+                        <br>- Voluntary releases: ~2,000/year
+                        <br>- Retirement: ~500/year
+                    </p>
+                    <p class="text-xs">
+                        <strong>Total Addressable Market:</strong> ~40,000 potential users (Recent veterans, reservists, spouses). Not the inflated "100k+" figures often cited in pitch decks.
+                    </p>
+                </div>
+
+                <!-- Phased Approach -->
+                <div style="margin-bottom: 30px;">
+                    <h3>Phase 1: Prove the Concept (2025-2026)</h3>
+                    <ul style="list-style: none; padding-left: 10px; font-family: var(--mono-font); font-size: 0.8rem; color: var(--text-muted);">
+                        <li>> Employers: 237 → 400 (Fill gaps, add regional nodes)</li>
+                        <li>> Users: 0 → 800 (Capture 20% of annual releases)</li>
+                        <li>> Revenue: $0 (Focus on adoption, not monetization)</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Phase 2: Build Reputation (2026-2027)</h3>
+                    <ul style="list-style: none; padding-left: 10px; font-family: var(--mono-font); font-size: 0.8rem; color: var(--text-muted);">
+                        <li>> Employers: 400 → 600</li>
+                        <li>> Users: 800 → 2,500 (Word of mouth growth)</li>
+                        <li>> Revenue: $10k-$15k (Paid listings from top defense firms)</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3>Phase 3: Sustainable Ops (2027-2028)</h3>
+                    <ul style="list-style: none; padding-left: 10px; font-family: var(--mono-font); font-size: 0.8rem; color: var(--text-muted);">
+                        <li>> Users: 5,000 (75% of annual releases)</li>
+                        <li>> Revenue: $40k-$60k (Self-sustaining model)</li>
+                    </ul>
+                </div>
+
+                <!-- Reality Check Box -->
+                <div class="code-block" style="background: rgba(255, 69, 0, 0.1); border-color: var(--alert); padding: 15px;">
+                    <strong style="color: var(--alert);">/// REVENUE REALITY CHECK</strong><br>
+                    This will not be a unicorn. It is a low-overhead utility.
+                    <br><br>
+                    - <strong>Constraint:</strong> We cannot charge veterans (defeats the mission).
+                    - <strong>Constraint:</strong> Small market cap (4,000 new users/yr).
+                    - <strong>Solution:</strong> Keep it lean. $500/mo running costs. Funded via corporate CSR (Corporate Social Responsibility) budgets, not user fees.
+                </div>
+            </div>
+
+            <!-- 5. SYSTEM STATUS -->
+            <div class="intel-section">
+                <h2>/// SYSTEM STATUS: PHASE 1</h2>
+                <div class="code-block">
+[STATUS: ONLINE]
+✅ Employer Directory (237 Nodes)
+✅ Sector Filtering
+✅ Security Clearance Indexing
+✅ Event Calendar
+✅ MOS Translator
+
+[STATUS: PENDING INFRASTRUCTURE]
+🚧 User Accounts (Requires Auth Server)
+🚧 Application Tracking (Requires DB Write Access)
+🚧 Direct Messaging (Requires WebSocket Cluster)
+                </div>
+                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+                    *NOTE: Current deployment allows for full "Read" access without account creation to maximize accessibility.
+                </p>
+            </div>
+
+            <div class="cta-box">
+                <p style="margin-bottom: 20px; font-family: var(--mono-font); color: var(--primary);">
+                    /// NETWORK ACTIVE
+                </p>
+                <h3 style="margin-bottom: 30px;">Access the Logistics Portal</h3>
+                
+                <a href="https://veteran-job-portal-fpl7r84ib.vercel.app" target="_blank" class="btn-primary">
+                    INITIATE UPLINK
+                </a>
+                
+                <div style="margin-top: 20px;">
+                     <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem;">OR RETURN TO HOME</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CHAMELEON TRACKING -->
+    <script>
+        // Log the visit -> Boost AUTHORITY score
+        let userProfile = JSON.parse(sessionStorage.getItem('userProfile')) || { authority: 0, urgency: 0, price: 0, tech: 0 };
+        userProfile.authority += 15; 
+        sessionStorage.setItem('userProfile', JSON.stringify(userProfile));
+    </script>
+</body>
+</html>

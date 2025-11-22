@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>GRANT RECON | Tactical Resource Acquisition</title>
+    <meta name="description" content="Declassified case study: Automating grant discovery for veteran organizations.">
+    <meta name="robots" content="noindex"> 
+
+    <!-- ANALYTICS -->
+    <script defer data-domain="aimeintelligence.com" src="https://plausible.io/js/script.js"></script>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* IMPORT THE CHAMELEON SYSTEM - AUTHORITY THEME */
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --primary: #00FF41; /* Green for Money/Success */
+            --secondary: #32CD32; 
+            --alert: #FFB000; 
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --mono-font: 'JetBrains Mono', monospace;
+            --header-font: 'Space Grotesk', sans-serif;
+        }
+
+        /* BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--header-font); background: var(--bg); color: var(--text-main); line-height: 1.6; }
+
+        /* FX */
+        .scanlines {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+            background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%);
+            background-size: 100% 4px; opacity: 0.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* NAV */
+        header { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-bottom: 60px; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-family: var(--mono-font); font-size: 0.8rem; }
+        .back-link:hover { color: var(--primary); }
+
+        /* HERO */
+        .mission-badge { 
+            display: inline-block; border: 1px solid var(--primary); color: var(--primary);
+            padding: 5px 10px; font-family: var(--mono-font); font-size: 0.7rem; margin-bottom: 20px;
+        }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 30px; }
+        
+        /* STATS */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-bottom: 60px; }
+        .stat-box { border: 1px solid rgba(255,255,255,0.1); padding: 20px; background: rgba(255,255,255,0.02); }
+        .stat-label { font-family: var(--mono-font); font-size: 0.65rem; color: var(--text-muted); display: block; margin-bottom: 5px; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+
+        /* SECTIONS */
+        .intel-section { margin-bottom: 60px; }
+        h2 { font-family: var(--mono-font); font-size: 1.2rem; color: var(--primary); margin-bottom: 20px; border-left: 3px solid var(--primary); padding-left: 15px; }
+        h3 { font-size: 1rem; margin-bottom: 10px; color: #fff; }
+        p { margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem; }
+        
+        /* FOOTER CTA */
+        .cta-box { text-align: center; padding: 60px; border: 1px dashed var(--primary); margin-top: 60px; }
+        .btn-primary {
+            background: var(--primary); color: #000; padding: 15px 30px; text-decoration: none;
+            font-weight: 700; font-family: var(--mono-font); display: inline-block;
+        }
+        .btn-primary:hover { box-shadow: 0 0 20px var(--primary); }
+        
+        .telemetry-node { position: fixed; bottom: 20px; right: 20px; z-index: 9000; font-family: var(--mono-font); font-size: 0.65rem; color: var(--text-muted); pointer-events: none; mix-blend-mode: exclusion; }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="telemetry-node">FINANCE NODE // LVL 3</div>
+
+    <div class="container">
+        <header>
+            <a href="index.html#calendar-section" class="back-link" style="color: var(--primary); border-bottom: 1px solid var(--primary);">&lt;&lt; SECURE ALLOCATION</a>
+        </header>
+
+        <main>
+            <div class="mission-badge" data-semantic="AUTHORITY">DECLASSIFIED: RESOURCE ACQUISITION</div>
+            
+            <h1 data-semantic="AUTHORITY">
+                Grant_Recon:<br>
+                <span style="color: var(--primary);">Automated Funding Intelligence.</span>
+            </h1>
+
+            <!-- 1. EXECUTIVE SUMMARY -->
+            <div class="intel-section" style="border: 1px solid var(--text-muted); padding: 20px; background: rgba(255,255,255,0.01);">
+                <h3 style="font-family: var(--mono-font); font-size: 0.8rem; color: var(--alert); margin-bottom: 10px;">/// SITUATION REPORT (SITREP)</h3>
+                <p>
+                    <strong>PROBLEM:</strong> Veteran organizations miss 30% of grant deadlines due to manual tracking (spreadsheets). Grant officers spend 20+ hours/month just searching.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>SOLUTION:</strong> Grant_Recon. A zero-dependency, offline-capable intelligence platform that tracks 60+ funding sources with automated urgency indicators.
+                </p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box" style="border-color: var(--primary);">
+                    <span class="stat-label">TIME REDUCTION</span>
+                    <span class="stat-val">90%</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">PIPELINE EXPANSION</span>
+                    <span class="stat-val">12x</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">BUILD TIME</span>
+                    <span class="stat-val">24 Hrs</span>
+                </div>
+            </div>
+
+            <!-- 2. TECHNICAL INNOVATION -->
+            <div class="intel-section" data-semantic="TECH">
+                <h2>/// THE ZERO-DEPENDENCY DOCTRINE</h2>
+                <p>
+                    Most grant platforms are bloated SaaS products costing $400/year. We built a <strong>Single-File Tactical Application</strong> (77KB) that runs entirely in the browser.
+                </p>
+                <ul style="list-style: none; font-family: var(--mono-font); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+                    <li style="margin-bottom: 10px;"><span style="color: var(--primary);">>>></span> <strong>Persistence:</strong> Uses LocalStorage API. No database required. Data never leaves the device.</li>
+                    <li style="margin-bottom: 10px;"><span style="color: var(--primary);">>>></span> <strong>Logic:</strong> Client-side date math calculates deadlines in real-time.</li>
+                    <li><span style="color: var(--primary);">>>></span> <strong>Resilience:</strong> Works offline. Immune to server outages.</li>
+                </ul>
+            </div>
+
+            <!-- 3. OPERATIONAL IMPACT -->
+            <div class="intel-section" data-semantic="AUTHORITY">
+                <h2>/// ROI ANALYSIS</h2>
+                <p>
+                    <strong>Cost of Inaction:</strong> A missed $50,000 grant due to a spreadsheet error is a catastrophic failure.
+                </p>
+                <p>
+                    <strong>Grant_Recon Value:</strong>
+                    <br>- Eliminates missed deadlines via "Red Alert" pulsing UI.
+                    <br>- Saves $10,800/year in manual research labor.
+                    <br>- Costs $0 to operate (No SaaS fees).
+                </p>
+            </div>
+
+            <div class="cta-box">
+                <p style="margin-bottom: 20px; font-family: var(--mono-font); color: var(--primary);">
+                    /// SYSTEM ONLINE
+                </p>
+                <h3 style="margin-bottom: 30px;">Access the Recon Platform</h3>
+                
+                <a href="https://wwbd-fexfjhz0l-aimeintelligence-gmailcoms-projects.vercel.app" target="_blank" class="btn-primary">
+                    START RECONNAISSANCE
+                </a>
+                
+                <div style="margin-top: 20px;">
+                     <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem;">OR RETURN TO HOME</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CHAMELEON TRACKING -->
+    <script>
+        // Log the visit -> Boost SPECULATOR score (Value/ROI Persona)
+        let userProfile = JSON.parse(sessionStorage.getItem('userProfile')) || { authority: 0, urgency: 0, price: 0, tech: 0 };
+        userProfile.price += 10; // Boosts Price sensitivity score (they like ROI)
+        sessionStorage.setItem('userProfile', JSON.stringify(userProfile));
+    </script>
+</body>
+</html>

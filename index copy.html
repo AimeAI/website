@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- STRATEGY & SEO -->
+    <title>AIME | Defense-Grade Automation</title>
+    <meta name="description" content="Your internal team is too slow. I deploy defense-grade systems in 48 hours. Specializing in ML pipelines, secure logistics, and rapid prototyping for Toronto/Canada defense sectors.">
+    <meta name="keywords" content="Defense AI, Rapid Prototyping, Toronto, Drone Detection, Veteran Owned, Logistics Software, AIME Intelligence, Mani Mehramooz">
+    <link rel="canonical" href="https://aimeintelligence.com">
+
+    <!-- SOCIAL / OPEN GRAPH -->
+    <meta property="og:title" content="AIME | Defense-Grade Systems">
+    <meta property="og:description" content="Stop waiting on internal procurement. I build defense-grade prototypes in 48 hours.">
+    <meta property="og:image" content="https://aimeintelligence.com/og-preview.jpg">
+    
+    <!-- ANALYTICS (Plausible + Custom Event Helper) -->
+    <script defer data-domain="aimeintelligence.com" src="https://plausible.io/js/script.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CHAMELEON ENGINE VARIABLES --- */
+        :root {
+            /* DEFAULT: COMMANDER (Green/Tactical) */
+            --bg: #030405;
+            --surface: #0d1117;
+            --primary: #00FF41;      
+            --secondary: #008F11;    
+            --alert: #FFB000;        
+            --text-main: #e6edf3;
+            /* ACCESSIBILITY FIX: High Contrast Muted Text */
+            --text-muted: #b0b8c0; 
+            
+            --header-font: 'Space Grotesk', sans-serif;
+            --body-font: 'Space Grotesk', sans-serif;
+            --mono-font: 'JetBrains Mono', monospace;
+            
+            --corner-radius: 0px;
+            --border-style: solid;
+            --grid-opacity: 0.03;
+            --scanline-opacity: 0.6;
+        }
+
+        /* MODE: SCIENTIST (Cyan/Purple/Data) */
+        body.mode-scientist {
+            --primary: #00F0FF; --secondary: #7df9ff; --alert: #FF00FF;
+            --header-font: 'JetBrains Mono', monospace; 
+            --corner-radius: 6px; --grid-opacity: 0.08; --scanline-opacity: 0.2;
+        }
+
+        /* MODE: SPECULATOR (Amber/Red/High Contrast) */
+        body.mode-speculator {
+            --primary: #FFB000; --secondary: #FF4500; --alert: #FF0000;
+            --header-font: 'Space Grotesk', sans-serif;
+            --border-style: dashed; --grid-opacity: 0.02;
+        }
+
+        /* --- BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: color 0.8s ease, border-color 0.8s ease, background-color 0.8s ease; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--body-font); background: var(--bg); color: var(--text-main);
+            line-height: 1.6; overflow-x: hidden;
+        }
+
+        /* --- UI ELEMENTS --- */
+        a:focus, button:focus { outline: 2px solid var(--primary); outline-offset: 4px; }
+        h1, h2, h3 { font-family: var(--header-font); text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .font-mono { font-family: var(--mono-font); }
+        .text-term { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
+        .text-def { color: var(--secondary); }
+        .text-warn { color: var(--alert); }
+        .text-muted { color: var(--text-muted); }
+        .text-xs { font-size: 0.75rem; }
+
+        /* --- FX --- */
+        .scanlines {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+            background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%);
+            background-size: 100% 4px; opacity: var(--scanline-opacity);
+            transition: opacity 1s ease;
+        }
+        .bg-grid {
+            position: fixed; inset: 0; z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,var(--grid-opacity)) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,var(--grid-opacity)) 1px, transparent 1px);
+            background-size: 40px 40px; transition: opacity 1s ease;
+        }
+
+        /* --- LAYOUT --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .pad-section { padding: 100px 0; }
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 100; padding: 16px 0;
+            background: rgba(3, 4, 5, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px;}
+        .logo { font-weight: 800; color: var(--text-main); text-decoration: none; letter-spacing: -0.1em; font-size: 1.2rem; }
+
+        /* --- HERO --- */
+        .hero { min-height: 90vh; padding: 140px 0 80px; display: flex; flex-direction: column; justify-content: center; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 700; margin-bottom: 24px; }
+        .hero-sub { font-size: 1.2rem; color: var(--text-muted); max-width: 640px; margin-bottom: 48px; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--primary);
+            color: var(--primary); padding: 6px 12px; border-radius: var(--corner-radius);
+            font-size: 0.75rem; margin-bottom: 32px; box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* --- BUTTONS & CARDS --- */
+        .btn {
+            height: 52px; padding: 0 32px; display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
+            text-decoration: none; cursor: pointer; border: 1px solid transparent;
+            white-space: nowrap; background: transparent; color: var(--text-main);
+            border-radius: var(--corner-radius);
+        }
+        .btn-primary { background: var(--primary); color: #000; border: none; }
+        .btn-primary:hover { box-shadow: 0 0 20px var(--primary); filter: brightness(1.2); }
+        
+        .btn-outline { border: 1px solid var(--primary); color: var(--primary); background: rgba(0,0,0,0.5); }
+        .btn-outline:hover { background: var(--primary); color: #000; }
+
+        .mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 60px; }
+        
+        .mission-card {
+            background: var(--surface); border: 1px var(--border-style) rgba(255,255,255,0.1); padding: 32px;
+            transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column;
+            text-decoration: none; color: inherit; position: relative; border-radius: var(--corner-radius);
+        }
+        .mission-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        /* --- HOLOGRAPHIC CARDS --- */
+        .card-holo {
+            position: relative; overflow: hidden;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .card-holo::before {
+            content: ''; position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            opacity: 0.3; transition: all 0.4s ease;
+            mix-blend-mode: luminosity;
+        }
+        .card-holo:hover::before { opacity: 0.6; transform: scale(1.05); mix-blend-mode: normal; }
+        .card-holo > * { position: relative; z-index: 2; }
+        /* Text protection */
+        .card-holo h3, .card-holo p, .card-holo .card-label {
+            text-shadow: 0 3px 6px rgba(0,0,0,1);
+        }
+
+        /* SPECIFIC CARD IMAGES */
+        .card-skyguard::before { background-image: url('skyguard-overlay.jpg'); }
+        .card-veteran::before { background-image: url('veteran-overlay.jpg'); }
+        .card-grant::before { background-image: url('grant-overlay.jpg'); }
+        
+        /* SPECIFIC HOVER COLORS */
+        .card-skyguard:hover { box-shadow: 0 0 40px rgba(0, 240, 255, 0.15); border-color: #00F0FF; }
+        .card-veteran:hover { box-shadow: 0 0 40px rgba(255, 176, 0, 0.15); border-color: #FFB000; }
+        .card-grant:hover { box-shadow: 0 0 40px rgba(0, 255, 65, 0.15); border-color: #00FF41; }
+        
+        /* --- TABLES & BOXES --- */
+        .table-container { overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); background: var(--surface); margin-bottom: 40px;}
+        table { width: 100%; min-width: 700px; border-collapse: collapse; font-family: var(--mono-font); }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+        
+        .protocol-box {
+            margin: 60px 0 0; padding: 40px; background: rgba(255, 255, 255, 0.01);
+            border: 1px var(--border-style) var(--alert); position: relative; 
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.05); border-radius: var(--corner-radius);
+        }
+
+        /* --- CALENDAR ALLOCATION MODAL (30 DAY GRID) --- */
+        .allocation-modal {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+            align-items: center; justify-content: center;
+        }
+        .allocation-panel {
+            width: 100%; max-width: 900px; background: #05070a;
+            border: 1px solid var(--primary); box-shadow: 0 0 40px var(--primary);
+            font-family: var(--mono-font); position: relative;
+            display: flex; flex-direction: column; max-height: 90vh;
+        }
+
+        .cal-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--primary);
+        }
+        .cal-title { font-size: 1rem; font-weight: bold; color: var(--text-main); }
+        .cal-nav-btn {
+            background: transparent; border: 1px solid var(--text-muted); color: var(--text-main);
+            padding: 5px 15px; cursor: pointer; font-family: var(--mono-font); font-size: 0.8rem;
+        }
+        .cal-nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .cal-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cal-day {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            min-height: 90px;
+            padding: 8px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            cursor: pointer; transition: all 0.2s; position: relative;
+        }
+        .cal-day:hover { border-color: var(--primary); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        
+        .day-header { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); }
+        .day-price { font-size: 0.85rem; font-weight: bold; text-align: right; margin-top: auto; }
+        .day-surge { color: var(--alert); border-color: var(--alert); background: rgba(255,0,0,0.05); }
+        .day-high { color: #FFB000; border-color: #FFB000; }
+        .day-optimal { color: var(--primary); border-color: var(--primary); }
+        .day-booked { opacity: 0.4; background: #000; border-style: dashed; cursor: not-allowed; }
+
+        /* LOCKOUT SCREEN */
+        .lockout-overlay {
+            display: none; position: fixed; inset: 0; z-index: 10000;
+            background: #000; flex-direction: column; align-items: center; justify-content: center;
+            font-family: var(--mono-font); color: var(--alert);
+        }
+        .blink { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* EXIT INTENT */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            z-index: 9998; display: none; align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background: var(--surface); border: 1px solid var(--primary);
+            padding: 40px; max-width: 500px; width: 90%; text-align: center;
+            position: relative; box-shadow: 0 0 50px rgba(0,255,65,0.2); border-radius: var(--corner-radius);
+        }
+        .modal-input {
+            width: 100%; padding: 12px; margin: 20px 0; background: #000;
+            border: 1px solid var(--text-muted); color: #fff; font-family: var(--body-font);
+        }
+        .close-modal {
+            position: absolute; top: 10px; right: 15px; cursor: pointer;
+            font-family: monospace; color: var(--text-muted); font-size: 1.2rem;
+        }
+
+        /* --- TELEMETRY HUD --- */
+        .telemetry-node {
+            position: fixed; bottom: 20px; right: 20px; z-index: 9000;
+            font-family: var(--mono-font); font-size: 0.65rem;
+            color: var(--text-muted); pointer-events: none;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+            mix-blend-mode: exclusion;
+        }
+
+        /* GLITCH */
+        @keyframes priceGlitch {
+            0% { opacity: 1; transform: translate(0); }
+            20% { opacity: 0.8; transform: translate(-2px, 1px); }
+            40% { opacity: 1; transform: translate(2px, -1px); }
+            100% { opacity: 1; transform: translate(0); }
+        }
+        .glitching { animation: priceGlitch 0.3s ease-in-out; color: var(--alert); }
+        
+        @media (max-width: 600px) {
+            .nav-inner { flex-direction: column; gap: 16px; padding-bottom: 10px; }
+            .hero { padding-top: 180px; text-align: center; }
+            .mission-grid { grid-template-columns: 1fr; }
+            .calendar-grid { grid-template-columns: repeat(4, 1fr); font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VISUAL FX LAYERS -->
+    <div class="scanlines"></div>
+    <div class="bg-grid"></div>
+
+    <!-- LOCKOUT OVERLAY (IDLE STATE) -->
+    <div class="lockout-overlay" id="lockoutScreen">
+        <div style="font-size: 3rem; margin-bottom: 20px;" class="blink">/// CONNECTION LOST</div>
+        <p style="margin-bottom: 40px; color: var(--text-muted);">SECURE TERMINAL IDLE TIMEOUT EXCEEDED.</p>
+        <button onclick="AttentionMonitor.resume()" class="btn btn-primary">RE-ESTABLISH UPLINK</button>
+    </div>
+
+    <!-- EXIT INTENT MODAL -->
+    <div class="modal-overlay" id="exitModal">
+        <div class="modal-box">
+            <div class="close-modal" onclick="document.getElementById('exitModal').style.display='none'">[X]</div>
+            <div class="font-mono text-term text-xs mb-2">/// INTELLIGENCE PACKET</div>
+            <h3>Wait — Get the Architecture Breakdown</h3>
+            <p class="text-muted text-sm" style="margin-top: 10px;">
+                Download the technical PDF explaining the 48-hour Edge-Compute protocol used in SkyGuard.
+            </p>
+            <form action="mailto:mani@aimeintelligence.com?subject=Send%20Capability%20PDF" method="post" enctype="text/plain">
+                <input type="email" placeholder="enter_secure_email" class="modal-input" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;" onclick="plausible('Lead: Exit Intent')">SEND BRIEFING</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TELEMETRY HUD -->
+    <div class="telemetry-node">
+        <div>STATUS: <span class="text-term" id="connStatus">ACTIVE</span></div>
+        <div>ID: <span class="text-term" id="personaLabel">ANALYZING...</span></div>
+        <div>INTENT: <span class="text-term" id="intentScore">0.00</span></div>
+    </div>
+
+    <!-- PRICING MODAL (TACTICAL CALENDAR) -->
+    <div class="allocation-modal" id="allocationModal">
+        <div class="allocation-panel">
+            <!-- Modal Header -->
+            <div style="padding: 15px; background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--primary); display:flex; justify-content:space-between;">
+                <div class="text-term font-mono">
+                    /// TACTICAL ALLOCATION GRID<br>
+                    <span style="font-size:0.6rem;" id="pricingFeedback">CALCULATING SUPPLY CHAIN...</span>
+                </div>
+                <span style="cursor:pointer; font-size:1.5rem;" onclick="document.getElementById('allocationModal').style.display='none'">×</span>
+            </div>
+            
+            <!-- Calendar Navigation -->
+            <div class="cal-nav">
+                <button class="cal-nav-btn" id="prevBtn" onclick="CalendarSystem.shift(-30)">&lt;&lt; PREV 30 DAYS</button>
+                <div class="cal-title" id="calDateRange">LOADING DATES...</div>
+                <button class="cal-nav-btn" id="nextBtn" onclick="CalendarSystem.shift(30)">NEXT 30 DAYS &gt;&gt;</button>
+            </div>
+
+            <!-- The 35-Day Grid -->
+            <div class="calendar-grid" id="calendarContainer"></div>
+            
+            <div style="padding:15px; text-align:center; font-size:0.7rem; color:var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1);">
+                Pricing dynamically adjusted based on lead time and system demand.
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="nav-inner">
+            <a href="#" class="logo font-mono">
+                <span class="text-term">///</span> AIME_INTELLIGENCE
+            </a>
+            <button onclick="CalendarSystem.open(); plausible('Nav: Check Availability')" class="btn btn-primary" style="height: 36px; font-size: 0.75rem;">
+                VIEW AVAILABILITY
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="badge font-mono">
+                    <div style="width:6px; height:6px; background:var(--primary); border-radius:50%;"></div>
+                    OPERATIONAL STATUS: ONLINE
+                </div>
+
+                <h1>
+                    Your <span data-semantic="PAIN">internal team</span> is too slow.<br>
+                    <span class="text-term">I <span data-semantic="URGENCY">deploy</span> in <span data-semantic="URGENCY">48 hours</span>.</span>
+                </h1>
+
+                <p class="hero-sub">
+                    Specialized <span data-semantic="TECH">rapid prototyping</span> for 
+                    <span data-semantic="AUTHORITY">Critical Infrastructure</span> and 
+                    <span data-semantic="AUTHORITY">Defense</span>. 
+                    I combine <span data-semantic="AUTHORITY">military logistics</span> with modern 
+                    <span data-semantic="TECH">AI pipelines</span> to bypass procurement gridlock.
+                </p>
+                
+                <div class="font-mono text-xs text-muted" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <span data-semantic="AUTHORITY">✓ VETERAN OWNED</span>
+                    <span data-semantic="TECH">✓ HBX CORe</span>
+                    <span data-semantic="AUTHORITY">✓ IATSE MEMBER</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITY PROOFS -->
+        <section class="pad-section" style="background: rgba(255,255,255,0.02);">
+            <div class="container">
+                <div class="font-mono text-muted text-xs mb-2">/// CAPABILITY PROOFS</div>
+                <h2>Don't Trust. <span data-semantic="TECH">Verify.</span></h2>
+                
+                <div class="mission-grid">
+                    
+                    <!-- 1. SKYGUARD TACTICAL (HOLOGRAPHIC REVEAL) -->
+                    <div class="mission-card card-holo card-skyguard" data-semantic="TECH">
+                        <div style="display:flex; justify-content:space-between; align-items:start;">
+                            <span class="card-label text-def">CAPABILITY: ML PIPELINES</span>
+                            <span class="text-xs font-mono text-def" style="border:1px solid #00F0FF; padding:2px 6px;">LIVE FEED</span>
+                        </div>
+                        
+                        <h3 class="mission-title" style="font-size: 1.4rem;">SkyGuard Tactical</h3>
+                        
+                        <p class="mission-desc text-xs" style="color: #e6edf3;">
+                            Browser-based acoustic threat detection.
+                            <br><span style="color: #00F0FF;">15ms Latency // 83% Accuracy.</span>
+                        </p>
+                        
+                        <div style="margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; position:relative; z-index:2;">
+                            <a href="https://skyguard-tactical-nt0sfkp59-aimeintelligence-gmailcoms-projects.vercel.app" target="_blank" class="btn btn-primary" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: #00F0FF; color: #000; border:none;" onclick="plausible('Demo: SkyGuard Launch')">
+                                LAUNCH TERMINAL
+                            </a>
+                            <a href="skyguard-intel.html" class="btn btn-outline" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: rgba(0,0,0,0.7); backdrop-filter:blur(4px);" onclick="plausible('Intel: SkyGuard Read')">
+                                INTEL DOSSIER
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2. VET_LINK OPS (HOLOGRAPHIC REVEAL) -->
+                    <div class="mission-card card-holo card-veteran" data-semantic="AUTHORITY">
+                        <div style="display:flex; justify-content:space-between; align-items:start;">
+                            <span class="card-label text-warn">CAPABILITY: LOGISTICS</span>
+                            <span class="text-xs font-mono text-warn" style="border:1px solid var(--alert); padding:2px 6px;">LIVE FEED</span>
+                        </div>
+                        
+                        <h3 class="mission-title" style="font-size: 1.4rem;">Vet_Link Ops</h3>
+                        
+                        <p class="mission-desc text-xs" style="color: #e6edf3;">
+                            Human Capital Logistics Network.
+                            <br><span style="color: var(--alert);">Secure Auth // Resume Logic.</span>
+                        </p>
+                        
+                        <div style="margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; position:relative; z-index:2;">
+                             <a href="https://veteran-job-portal-fpl7r84ib.vercel.app" target="_blank" class="btn btn-primary" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: var(--alert); color: #000; border:none;" onclick="plausible('Demo: VetLink Launch')">
+                                LAUNCH PORTAL
+                             </a>
+                             <a href="veteran-intel.html" class="btn btn-outline" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: rgba(0,0,0,0.7); backdrop-filter:blur(4px); border-color: var(--alert); color: var(--alert);" onclick="plausible('Intel: VetLink Read')">
+                                ACCESS FILES
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 3. GRANT RECON (HOLOGRAPHIC REVEAL) -->
+                    <div class="mission-card card-holo card-grant" data-semantic="URGENCY">
+                        <div style="display:flex; justify-content:space-between; align-items:start;">
+                            <span class="card-label text-term">CAPABILITY: VELOCITY</span>
+                            <span class="text-xs font-mono text-term" style="border:1px solid var(--primary); padding:2px 6px;">LIVE FEED</span>
+                        </div>
+                        
+                        <h3 class="mission-title" style="font-size: 1.4rem;">Grant_Recon</h3>
+                        
+                        <p class="mission-desc text-xs" style="color: #e6edf3;">
+                            Tactical Resource Acquisition.
+                            <br><span style="color: var(--primary);">60+ Sources // Zero Cost.</span>
+                        </p>
+                        
+                        <div style="margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; position:relative; z-index:2;">
+                            <a href="https://wwbd-fexfjhz0l-aimeintelligence-gmailcoms-projects.vercel.app" target="_blank" class="btn btn-primary" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: var(--primary); color: #000; border:none;" onclick="plausible('Demo: GrantRecon Launch')">
+                                START RECON
+                            </a>
+                            <a href="grant-intel.html" class="btn btn-outline" style="height: 36px; font-size: 0.7rem; padding: 0 15px; background: rgba(0,0,0,0.7); backdrop-filter:blur(4px); border-color: var(--primary); color: var(--primary);" onclick="plausible('Intel: GrantRecon Read')">
+                                MISSION INTEL
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIAL PROOF -->
+        <section class="pad-section" style="padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <div class="container">
+                <div class="font-mono text-xs text-muted mb-2" style="opacity: 0.7;">DEPLOYMENT SECTORS</div>
+                <div style="display: flex; gap: 40px; flex-wrap: wrap; opacity: 0.5; font-family: 'JetBrains Mono'; color: var(--text-main);">
+                    <span data-semantic="AUTHORITY">/// DEFENSE CONTRACTORS</span>
+                    <span data-semantic="AUTHORITY">/// LOGISTICS FIRMS</span>
+                    <span data-semantic="AUTHORITY">/// VETERAN ORGS</span>
+                    <span data-semantic="TECH">/// FINTECH OPS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROTOCOL & PRICING TRIGGER -->
+        <section class="pad-section" id="pricingSection" data-semantic="PRICE">
+            <div class="container">
+                <div class="section-head">
+                    <div class="font-mono text-muted text-xs mb-2">/// PILOT PROGRAM</div>
+                    <h2>Operational Tiers</h2>
+                </div>
+                
+                <div class="mission-grid" style="margin-top: 40px;">
+                    <!-- Tier 1 -->
+                    <div class="mission-card" onclick="CalendarSystem.open(); plausible('Pricing: Tier 1 Click')">
+                        <span class="card-label text-term">TIER 1: PROOF OF CONCEPT</span>
+                        <h3>Rapid Prototype</h3>
+                        <p class="text-muted text-xs">48-hour sprint. Fixed scope. Deployment ready.</p>
+                        <div class="mission-specs">
+                            <span class="text-muted">TIMELINE: 48 HRS</span>
+                            <span class="text-term font-mono dynamic-price" data-base="7500">$7,500 FIXED</span>
+                        </div>
+                    </div>
+                    <!-- Tier 2 -->
+                    <div class="mission-card" onclick="CalendarSystem.open(); plausible('Pricing: Tier 2 Click')">
+                        <span class="card-label text-def">TIER 2: MVP SYSTEM</span>
+                        <h3>Full Architecture</h3>
+                        <p class="text-muted text-xs">Production-ready logic. DB + Auth + API.</p>
+                        <div class="mission-specs">
+                            <span class="text-muted">TIMELINE: 14 DAYS</span>
+                            <span class="text-def font-mono dynamic-price" data-base="28000">$28,000 FIXED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="protocol-box">
+                    <h3 class="font-mono">Engagement Protocol</h3>
+                    <p class="text-muted" style="max-width: 600px; margin-bottom: 20px;">
+                        To maintain velocity, I operate on a strict schedule. 
+                        <span data-semantic="PRICE">Engagements are secured via deposit.</span>
+                    </p>
+                    <ul class="font-mono text-xs text-muted" style="list-style:none; margin-bottom:30px;">
+                        <li style="margin-bottom:8px;">1. <strong>50% Deposit</strong> locks deployment dates.</li>
+                        <li>2. <strong>50% Balance</strong> on code delivery.</li>
+                    </ul>
+                    <button onclick="CalendarSystem.open(); plausible('Protocol: Check Allocation')" class="btn btn-primary font-mono">
+                        CHECK Q1 ALLOCATION
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="font-mono text-xs text-muted">
+                SECURE COMM: <a href="mailto:mani@aimeintelligence.com" style="color: var(--text-main);">mani@aimeintelligence.com</a><br>
+                &copy; 2025 MANI MEHRAMOOZ
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================================== -->
+    <!-- THE BRAIN: ATTENTION MONITOR + GAME THEORY ENGINES       -->
+    <!-- ======================================================== -->
+    <script>
+        /* ATTENTION MONITOR */
+        const AttentionMonitor = {
+            isIdle: false, lastActivity: Date.now(), idleThreshold: 300000, pauseThreshold: 30000,
+            init() {
+                ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart'].forEach(evt => document.addEventListener(evt, () => this.resetTimer()));
+                document.addEventListener('visibilitychange', () => this.setIdle(document.hidden));
+                setInterval(() => this.check(), 1000);
+            },
+            resetTimer() { this.lastActivity = Date.now(); if (this.isIdle && !document.hidden) this.resume(); },
+            check() { if (Date.now() - this.lastActivity > this.idleThreshold) document.getElementById('lockoutScreen').style.display = 'flex'; },
+            setIdle(state) {
+                this.isIdle = state;
+                const el = document.getElementById('connStatus');
+                el.innerText = state ? "IDLE/SUSPENDED" : "ACTIVE";
+                el.style.color = state ? "var(--alert)" : "var(--primary)";
+            },
+            resume() {
+                this.isIdle = false; this.lastActivity = Date.now();
+                document.getElementById('lockoutScreen').style.display = 'none';
+                document.getElementById('connStatus').innerText = "ACTIVE";
+                document.getElementById('connStatus').style.color = "var(--primary)";
+            },
+            isActive() { return !this.isIdle && !document.hidden && (Date.now() - this.lastActivity < this.pauseThreshold); }
+        };
+        AttentionMonitor.init();
+
+        /* CHAMELEON ENGINE & PRICING */
+        const Chameleon = {
+            scores: { commander: 0, scientist: 0, speculator: 0 },
+            dominantPersona: 'commander',
+            
+            pricingConfig: {
+                commander:  { floor: 7500, ceiling: 18000, decay: 0.1, multiplier: 1.0 },
+                scientist:  { floor: 6500, ceiling: 14000, decay: 0.15, multiplier: 1.0 },
+                speculator: { floor: 3500, ceiling: 22000, decay: 0.3, multiplier: 1.3 } 
+            },
+
+            init() {
+                let profile = JSON.parse(sessionStorage.getItem('userProfile')) || {};
+                if (profile.tech) this.scores.scientist += profile.tech;
+                if (profile.authority) this.scores.commander += profile.authority;
+                this.updatePersona();
+                document.querySelectorAll('[data-semantic]').forEach(el => {
+                    el.addEventListener('mouseenter', () => { if(AttentionMonitor.isActive()) this.analyze(el.getAttribute('data-semantic')); });
+                });
+            },
+            analyze(tag) {
+                if (tag === 'AUTHORITY') this.scores.commander += 2;
+                if (tag === 'PAIN')      this.scores.commander += 1;
+                if (tag === 'TECH')      this.scores.scientist += 2;
+                if (tag === 'URGENCY')   this.scores.speculator += 2;
+                if (tag === 'PRICE')     this.scores.speculator += 3;
+                this.updatePersona();
+            },
+            updatePersona() {
+                let max = 0; let winner = this.dominantPersona;
+                for (const [role, score] of Object.entries(this.scores)) { if (score > max) { max = score; winner = role; } }
+                if (winner !== this.dominantPersona) {
+                    this.dominantPersona = winner;
+                    document.body.className = `mode-${winner}`;
+                    document.getElementById('personaLabel').innerText = `TARGET: ${winner.toUpperCase()}`;
+                }
+                document.getElementById('intentScore').innerText = max.toFixed(1);
+            }
+        };
+        Chameleon.init();
+
+        /* TACTICAL CALENDAR SYSTEM */
+        const CalendarSystem = {
+            viewOffset: 0, // Days offset from today
+            today: new Date(),
+            
+            open() {
+                document.getElementById('allocationModal').style.display = 'flex';
+                this.render();
+            },
+            
+            shift(days) {
+                this.viewOffset += days;
+                if (this.viewOffset < 0) this.viewOffset = 0; // Can't go past today
+                if (this.viewOffset > 90) this.viewOffset = 90; // Max 3 months
+                this.render();
+            },
+            
+            render() {
+                const container = document.getElementById('calendarContainer');
+                const feedback = document.getElementById('pricingFeedback');
+                const dateRange = document.getElementById('calDateRange');
+                const config = Chameleon.pricingConfig[Chameleon.dominantPersona];
+                
+                // Update Feedback Text based on Persona
+                let feedbackText = `PRICING MODEL: ${Chameleon.dominantPersona.toUpperCase()} DETECTED`;
+                let color = "var(--text-muted)";
+                if (Chameleon.dominantPersona === 'speculator') { feedbackText += " // SURGE ACTIVE"; color = "var(--alert)"; }
+                if (Chameleon.dominantPersona === 'commander') { feedbackText += " // PRIORITY ACCESS"; color = "var(--primary)"; }
+                feedback.innerText = feedbackText;
+                feedback.style.color = color;
+
+                // Dates
+                const startDate = new Date(this.today);
+                startDate.setDate(this.today.getDate() + this.viewOffset);
+                const endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + 34);
+                
+                dateRange.innerText = `${startDate.toLocaleDateString(undefined, {month:'short', day:'numeric'})} - ${endDate.toLocaleDateString(undefined, {month:'short', day:'numeric'})}`;
+                
+                // Update Nav Buttons
+                document.getElementById('prevBtn').disabled = this.viewOffset === 0;
+                document.getElementById('nextBtn').disabled = this.viewOffset >= 90;
+
+                container.innerHTML = '';
+
+                // Generate 35 Days (5 weeks x 7 days)
+                for (let i = 0; i < 35; i++) {
+                    let currentDate = new Date(startDate);
+                    currentDate.setDate(startDate.getDate() + i);
+                    
+                    // Calculate Pricing based on distance from TODAY (not view start)
+                    let absoluteDiff = this.viewOffset + i;
+                    
+                    // Game Theory Price Curve
+                    let price = config.floor + (config.ceiling - config.floor) * Math.exp(-config.decay * (absoluteDiff/3));
+                    price = Math.ceil(price / 50) * 50;
+                    
+                    // Status Logic
+                    let status = "OPEN";
+                    let styleClass = "day-optimal";
+                    
+                    if (absoluteDiff < 3) { status = "SURGE"; styleClass = "day-surge"; }
+                    else if (absoluteDiff < 14) { status = "HIGH"; styleClass = "day-high"; }
+                    
+                    // Artificial Scarcity (Randomly lock dates, but less on far future)
+                    if ((Math.random() > 0.85 && absoluteDiff > 5) || currentDate.getDay() === 0) {
+                        status = "BOOKED";
+                        styleClass = "day-booked";
+                    }
+                    
+                    let dateStr = currentDate.toLocaleDateString(undefined, {weekday:'short', month:'short', day:'numeric'});
+                    
+                    let html = `
+                        <div class="cal-day ${styleClass}" 
+                             ${status !== 'BOOKED' ? `onclick="window.location.href='mailto:mani@aimeintelligence.com?subject=Lock Date ${dateStr} at $${price}&body=Securing allocation.'"` : ''}>
+                            <div class="day-header">
+                                <span>${currentDate.getDate()}</span>
+                                <span>${currentDate.toLocaleDateString(undefined, {weekday:'short'}).toUpperCase()}</span>
+                            </div>
+                    `;
+                    
+                    if (status !== 'BOOKED') {
+                        html += `
+                            <div class="day-price">$${(price/1000).toFixed(1)}k</div>
+                            <div class="day-status" style="color:${styleClass === 'day-surge' ? 'var(--alert)' : 'inherit'}">${status}</div>
+                        `;
+                    } else {
+                        html += `<div class="day-status" style="margin-top:auto;">LOCKED</div>`;
+                    }
+                    
+                    html += `</div>`;
+                    container.innerHTML += html;
+                }
+            }
+        };
+
+        /* SCROLL PRICING GLITCH */
+        const pricingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const config = Chameleon.pricingConfig[Chameleon.dominantPersona];
+                    document.querySelectorAll('.dynamic-price').forEach(el => {
+                        const base = parseInt(el.getAttribute('data-base'));
+                        const newPrice = Math.round(base * config.multiplier);
+                        if (newPrice !== base) { el.innerText = `$${newPrice.toLocaleString()} SURGE`; el.classList.add('glitching'); }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        pricingObserver.observe(document.getElementById('pricingSection'));
+
+        /* NETWORK LOAD */
+        let sessionSeconds = 0;
+        setInterval(() => {
+            if (AttentionMonitor.isActive()) {
+                sessionSeconds++;
+                let load = Math.min(12 + Math.floor(sessionSeconds / 5), 98);
+                document.getElementById('networkLoadText').innerText = `NETWORK LOAD: ${load}%`;
+                document.getElementById('loadFill').style.width = `${load}%`;
+            }
+        }, 1000);
+
+        /* EXIT INTENT */
+        const exitModal = document.getElementById('exitModal');
+        let hasExitShown = false;
+        document.addEventListener('mouseleave', e => { if (e.clientY <= 0 && !hasExitShown) { exitModal.style.display = 'flex'; hasExitShown = true; } });
+
+    </script>
+</body>
+</html>
