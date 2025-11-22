@@ -249,6 +249,7 @@ class DronePipeline:
                             <li>✓ <strong>Perpetual License:</strong> You own the base node forever.</li>
                         </ul>
                         <div style="margin-top: 20px; font-size: 0.7rem; color: var(--alert);">* One-time CapEx Fee</div>
+                        <button onclick="openSkyGuardPurchase('deployment')" style="width:100%; margin-top:20px; padding:15px; background:var(--text-main); color:#000; border:none; font-family:var(--mono-font); font-weight:bold; cursor:pointer; font-size:0.9rem;">REQUEST DEPLOYMENT</button>
                     </div>
 
                     <!-- CARD 2: SUSTAINMENT -->
@@ -265,6 +266,7 @@ class DronePipeline:
                             <li>✓ <strong>24/7 Engineering Support:</strong> Direct line to architect.</li>
                         </ul>
                         <div style="margin-top: 20px; font-size: 0.7rem; opacity: 0.7;">* Cancel anytime. System reverts to last update.</div>
+                        <button onclick="openSkyGuardPurchase('intel')" style="width:100%; margin-top:20px; padding:15px; background:var(--primary); color:#000; border:none; font-family:var(--mono-font); font-weight:bold; cursor:pointer; font-size:0.9rem;">SUBSCRIBE TO INTEL</button>
                     </div>
 
                 </div>
@@ -290,6 +292,48 @@ class DronePipeline:
         </main>
     </div>
 
+    <!-- SKYGUARD PURCHASE MODAL -->
+    <div id="skyguard-purchase-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:9999; align-items:center; justify-content:center;">
+        <div style="width:90%; max-width:600px; background:#000; border:1px solid var(--primary); padding:2px;">
+            <div style="background:var(--primary); color:#000; padding:5px 10px; font-family:var(--mono-font); font-size:0.8rem; display:flex; justify-content:space-between;">
+                <span id="modal-title">>> DEPLOYMENT REQUEST</span>
+                <span style="cursor:pointer;" onclick="closeSkyGuardPurchase()">[X]</span>
+            </div>
+            <div style="padding:20px;">
+                <div style="font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:20px;">
+                    <span id="modal-subtitle">SITE DEPLOYMENT: $15,000</span>
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:5px;">CONTACT NAME</label>
+                    <input type="text" id="sg-name" style="width:100%; padding:10px; background:#000; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:var(--mono-font);" placeholder="Enter name...">
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:5px;">EMAIL</label>
+                    <input type="email" id="sg-email" style="width:100%; padding:10px; background:#000; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:var(--mono-font);" placeholder="you@company.com">
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:5px;">SITE ADDRESS</label>
+                    <input type="text" id="sg-address" style="width:100%; padding:10px; background:#000; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:var(--mono-font);" placeholder="Facility location...">
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:5px;">COUNTRY</label>
+                    <input type="text" id="sg-country" style="width:100%; padding:10px; background:#000; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:var(--mono-font);" placeholder="Country...">
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; font-family:var(--mono-font); font-size:0.7rem; color:var(--text-muted); margin-bottom:5px;">ADDITIONAL DETAILS</label>
+                    <textarea id="sg-details" style="width:100%; padding:10px; background:#000; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:var(--mono-font); min-height:80px;" placeholder="Coverage area, timeline, security clearance level..."></textarea>
+                </div>
+
+                <button id="sg-submit-btn" onclick="submitSkyGuardPurchase()" style="width:100%; padding:15px; background:var(--primary); color:#000; border:none; font-family:var(--mono-font); font-weight:bold; cursor:pointer; font-size:0.9rem;">TRANSMIT REQUEST</button>
+            </div>
+        </div>
+    </div>
+
     <!-- CHAMELEON TRACKING -->
     <script>
         // Log the visit -> Boost SCIENTIST & COMMANDER score
@@ -297,6 +341,98 @@ class DronePipeline:
         userProfile.tech += 10;
         userProfile.authority += 10;
         sessionStorage.setItem('userProfile', JSON.stringify(userProfile));
+
+        // Purchase modal logic
+        let currentPurchaseType = '';
+
+        function openSkyGuardPurchase(type) {
+            currentPurchaseType = type;
+            const modal = document.getElementById('skyguard-purchase-modal');
+            const title = document.getElementById('modal-title');
+            const subtitle = document.getElementById('modal-subtitle');
+
+            if (type === 'deployment') {
+                title.innerText = '>> SITE DEPLOYMENT REQUEST';
+                subtitle.innerText = 'TACTICAL SITE DEPLOYMENT: $15,000 / SITE';
+            } else {
+                title.innerText = '>> INTEL SUBSCRIPTION REQUEST';
+                subtitle.innerText = 'THREAT INTEL STREAM: $2,500 / MONTH';
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeSkyGuardPurchase() {
+            document.getElementById('skyguard-purchase-modal').style.display = 'none';
+        }
+
+        function submitSkyGuardPurchase() {
+            const name = document.getElementById('sg-name').value;
+            const email = document.getElementById('sg-email').value;
+            const address = document.getElementById('sg-address').value;
+            const country = document.getElementById('sg-country').value;
+            const details = document.getElementById('sg-details').value;
+            const btn = document.getElementById('sg-submit-btn');
+
+            // Validation
+            if (!name || !email || !address || !country) {
+                btn.innerText = '>> ERROR: ALL FIELDS REQUIRED';
+                btn.style.background = 'var(--alert)';
+                setTimeout(() => {
+                    btn.innerText = 'TRANSMIT REQUEST';
+                    btn.style.background = 'var(--primary)';
+                }, 2000);
+                return;
+            }
+
+            // Disable button
+            btn.disabled = true;
+            btn.innerText = 'ENCRYPTING & TRANSMITTING...';
+            btn.style.background = 'var(--secondary)';
+
+            // Determine subject and pricing
+            const subject = currentPurchaseType === 'deployment'
+                ? 'SkyGuard Site Deployment Request - $15,000'
+                : 'SkyGuard Threat Intel Subscription - $2,500/mo';
+
+            const body = `SKYGUARD ${currentPurchaseType.toUpperCase()} REQUEST
+
+CONTACT INFORMATION:
+Name: ${name}
+Email: ${email}
+
+SITE INFORMATION:
+Address: ${address}
+Country: ${country}
+
+ADDITIONAL DETAILS:
+${details || 'None provided'}
+
+PACKAGE: ${currentPurchaseType === 'deployment' ? 'Tactical Site Deployment ($15,000)' : 'Threat Intel Stream ($2,500/month)'}`;
+
+            // Send via mailto (will compose email but won't auto-send)
+            const mailtoLink = `mailto:mani@aimeintelligence.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+
+            // Visual confirmation
+            setTimeout(() => {
+                btn.innerText = '>> SIGNAL RECEIVED';
+                btn.style.background = 'var(--primary)';
+                btn.style.color = '#000';
+
+                setTimeout(() => {
+                    closeSkyGuardPurchase();
+                    // Reset form
+                    document.getElementById('sg-name').value = '';
+                    document.getElementById('sg-email').value = '';
+                    document.getElementById('sg-address').value = '';
+                    document.getElementById('sg-country').value = '';
+                    document.getElementById('sg-details').value = '';
+                    btn.innerText = 'TRANSMIT REQUEST';
+                    btn.disabled = false;
+                }, 1500);
+            }, 1000);
+        }
     </script>
 </body>
 </html>
