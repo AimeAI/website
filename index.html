@@ -1835,9 +1835,11 @@
         const HeroRotator = {
             messages: {
                 'COMMANDER': [
-                    { h1: "Your Internal Teams<br>Are Too Slow.<br>I Ship in 48 Hours.", sub: "No agencies. No discovery phases. Just deployment." },
+                    { h1: "Your Internal Teams<br>Are Too Slow.<br>I Ship in 48 Hours.", sub: "No agencies. No discovery phases. Just deployment.", sticky: true },
                     { h1: "Accelerate Acquisition.<br>Own The Code.<br>Deploy Now.", sub: "While your team plans meetings, I'm deploying systems." },
-                    { h1: "Operational AI.<br>Zero Dependencies.<br>Full Sovereignty.", sub: "Operational code delivered in 48 hours. Not quarters. Hours." }
+                    { h1: "Your Internal Teams<br>Are Too Slow.<br>I Ship in 48 Hours.", sub: "No agencies. No discovery phases. Just deployment.", sticky: true },
+                    { h1: "Operational AI.<br>Zero Dependencies.<br>Full Sovereignty.", sub: "Operational code delivered in 48 hours. Not quarters. Hours." },
+                    { h1: "Your Internal Teams<br>Are Too Slow.<br>I Ship in 48 Hours.", sub: "No agencies. No discovery phases. Just deployment.", sticky: true }
                 ],
                 'TECHNICAL_DECISION_MAKER': [
                     { h1: "Edge-Native.<br>Air-Gapped.<br>15ms Latency.", sub: "Cloud architectures fail in contested environments. Go local." },
@@ -1880,8 +1882,9 @@
                     // After H1 finishes, type the subtitle
                     setTimeout(() => {
                         this.typeWriter(subEl, msg.sub, 15, () => {
-                            // Wait before next cycle
-                            this.interval = setTimeout(() => this.cycle(), 6000);
+                            // Wait before next cycle - sticky messages linger 20% longer (7200ms vs 6000ms)
+                            const delay = msg.sticky ? 7200 : 6000;
+                            this.interval = setTimeout(() => this.cycle(), delay);
                         });
                     }, 300);
                 });
