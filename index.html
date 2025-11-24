@@ -498,14 +498,32 @@
             .cal-price { font-size: 0.75rem; }
             .cal-day:hover .cal-price { font-size: 0.85rem; }
 
-            /* Loss ticker */
-            .loss-ticker { padding: 25px 15px; margin: 40px 0; }
-            .loss-val { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+            /* Loss ticker - sticky on mobile */
+            .loss-ticker {
+                padding: 12px 15px;
+                margin: 0;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 999;
+                background: rgba(10, 12, 16, 0.98);
+                border-top: 2px solid var(--alert);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.3);
+            }
+            .loss-val { font-size: clamp(1.5rem, 5vw, 2rem); }
+            #loss-label { font-size: 0.65rem !important; margin-bottom: 4px !important; }
+            #loss-headline { font-size: 0.85rem !important; margin-bottom: 4px !important; }
+            #loss-context { font-size: 0.7rem !important; margin-top: 6px !important; min-height: auto !important; display: none; } /* Hide context on mobile for compactness */
 
-            /* HUD elements - reposition for mobile */
-            .telemetry-node { bottom: 10px; right: 10px; font-size: 0.6rem; }
+            /* Add padding to body to account for sticky ticker */
+            body { padding-bottom: 140px; }
+
+            /* HUD elements - reposition for mobile (moved up to avoid sticky ticker) */
+            .telemetry-node { bottom: 150px; right: 10px; font-size: 0.6rem; }
             .active-users { top: 70px; right: 10px; font-size: 0.65rem; padding: 4px 8px; }
-            .agent-log { bottom: 10px; left: 10px; font-size: 0.65rem; }
+            .agent-log { bottom: 150px; left: 10px; font-size: 0.65rem; }
 
             /* Modals */
             .term-modal { width: 95%; padding: 1px; }
@@ -590,11 +608,12 @@
 
     <div id="lead-modal" class="overlay hidden">
         <div class="term-modal">
-            <div class="term-header"><span>>> CREDENTIALS REQUIRED</span><span onclick="document.getElementById('lead-modal').classList.add('hidden')">[X]</span></div>
+            <div class="term-header"><span>>> CLEARANCE REQUIRED</span><span onclick="document.getElementById('lead-modal').classList.add('hidden')">[X]</span></div>
             <div class="term-body">
-                <p>Enter your email to access the secured terminal.</p>
-                <input type="email" id="lead-email" class="term-input" placeholder="you@company.com">
-                <button class="btn" onclick="LeadCapture.submit()" style="width:100%;">AUTHENTICATE</button>
+                <p style="color: var(--alert); font-family: var(--font-mono); margin-bottom: 15px;">>> RESTRICTED ARCHITECTURE. This system is classified for commercial use.</p>
+                <p style="margin-bottom: 20px;">Authenticate to bypass security protocols and access terminal.</p>
+                <input type="email" id="lead-email" class="term-input" placeholder="authorized.user@company.com">
+                <button class="btn" onclick="LeadCapture.submit()" style="width:100%;">AUTHENTICATE & BYPASS</button>
             </div>
         </div>
     </div>
@@ -624,6 +643,9 @@
         <div class="container nav-flex">
             <div class="logo">AIME // INTEL</div>
             <div class="mono" style="font-size: 0.7rem; display: flex; align-items: center;">
+                <!-- VETERAN DESIGNATOR -->
+                <span style="margin-right: 15px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 2px 6px;">[ CAF VETERAN ]</span>
+
                 <!-- TACTICAL STIMULI CONTROL -->
                 <button id="motion-toggle" class="audio-btn" onclick="MotionController.toggle()" style="margin-right: 10px; border-color: var(--alert); color: var(--alert);">STIMULI: MAX</button>
 
@@ -637,11 +659,11 @@
 
     <main>
         <section class="container hero">
-            <div class="badge" id="hero-badge">OPERATIONAL READINESS</div>
+            <div class="badge" id="hero-badge">VOSB // OPERATIONAL READINESS</div>
             <h1 class="dynamic-hero">Your Internal Teams<br>Are Too Slow.<br>I Ship in 48 Hours.</h1>
             <p class="hero-sub dynamic-subhero">No agencies. No discovery phases. Just deployment.</p>
             <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">INITIATE DEPLOYMENT</button>
+                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">SECURE ALLOCATION</button>
                 <div class="dynamic-price" style="font-family: var(--mono-font); font-size: 1.2rem; color: var(--text-muted);">$7,500 START</div>
             </div>
         </section>
@@ -673,13 +695,13 @@
             <div class="grid">
                 <div class="card-holo card-skyguard" data-semantic="DEFENSE">
                     <div class="card-content">
-                        <div class="card-top"><span class="card-label">LIVE FEED</span><span class="card-live"><div class="blink-dot"></div> ONLINE</span></div>
+                        <div class="card-top"><span class="card-label">DEFENSE</span><span class="card-live" style="color: #FFB000;"><div class="blink-dot" style="background: #FFB000;"></div> TRL 5</span></div>
                         <h3>SkyGuard Tactical</h3>
-                        <p>Acoustic drone detection. 15ms Latency Edge-Native architecture.</p>
-                        <div class="live-metric">>> THREATS BLOCKED: <span id="metric-skyguard">14,201</span></div>
+                        <p>Passive acoustic air defense. 15ms latency, edge-native. $0 open source → $2,499 evaluation node.</p>
+                        <div class="live-metric">>> DEPLOYMENT: Field evaluation ready | ATAK-native</div>
                         <div class="card-actions">
-                            <button onclick="LeadCapture.request('SkyGuard', 'https://skyguard-tactical-nt0sfkp59-aimeintelligence-gmailcoms-projects.vercel.app')" class="btn-sm btn-fill">LAUNCH TERMINAL ↗</button>
-                            <button class="btn-sm btn-outline" onclick="SalesEngine.trackIntent('DEFENSE', 'skyguard-intel.html')">INTEL DOSSIER</button>
+                            <button onclick="LeadCapture.request('SkyGuard', 'https://skyguard-tactical-nt0sfkp59-aimeintelligence-gmailcoms-projects.vercel.app')" class="btn-sm btn-fill">VIEW DEMO ↗</button>
+                            <button class="btn-sm btn-outline" onclick="SalesEngine.trackIntent('DEFENSE', 'skyguard-intel.html')">DEPLOYMENT OPTIONS</button>
                         </div>
                     </div>
                 </div>
@@ -846,8 +868,11 @@
                 <div class="crisis-panel">
                     <!-- THE TIMER -->
                     <div class="tactical-timer">
-                        <span class="blink text-warn">/// WINDOW CLOSING:</span>
-                        <span id="deploy-timer" class="font-mono text-warn" style="font-size: 1.5rem; font-weight: 700;">03:59:59</span>
+                        <span class="blink text-warn">/// CURRENT CYCLE CAPACITY: <span id="capacity-pct">92</span>% FULL</span>
+                        <div style="margin-top: 8px;">
+                            <span style="font-size: 0.9rem; color: var(--text-muted);">NEXT DEPLOYMENT WINDOW CLOSES IN:</span>
+                            <span id="deploy-timer" class="font-mono text-warn" style="font-size: 1.5rem; font-weight: 700; display: block; margin-top: 4px;">03:59:59</span>
+                        </div>
                     </div>
 
                     <!-- THE BIG RED BUTTON -->
@@ -906,6 +931,21 @@
         </section>
 
     </main>
+
+    <!-- FOOTER: CONTRACT VEHICLE METADATA -->
+    <footer style="margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0 60px 0; background: rgba(0,0,0,0.3);">
+        <div class="container" style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-align: center;">
+            <div style="margin-bottom: 15px; color: var(--text-main); font-weight: bold; letter-spacing: 1px;">
+                AIME INTELLIGENCE IS A VETERAN-OWNED ENTITY.
+            </div>
+            <div style="line-height: 1.8;">
+                NCAGE: [PENDING] | JCP: [PENDING] | OPERATING UNDER ALLIED NTIB PROTOCOLS.
+            </div>
+            <div style="margin-top: 20px; opacity: 0.6;">
+                DESIGNED BY 25 SERVICE BATTALION VETERAN | CANADIAN ARMED FORCES
+            </div>
+        </div>
+    </footer>
 
     <script>
         'use strict';
@@ -1705,12 +1745,12 @@
 
                 if(persona === 'CRISIS_BUYER') {
                     document.querySelector('.dynamic-hero').innerHTML = "System Critical?<br><span style='color:var(--alert)'>Deploy Tonight.</span>";
-                    document.getElementById('hero-badge').innerText = "EMERGENCY RESPONSE AVAILABLE";
+                    document.getElementById('hero-badge').innerText = "VOSB // EMERGENCY RESPONSE AVAILABLE";
                     document.getElementById('hero-badge').style.borderColor = 'var(--alert)';
                     document.getElementById('hero-badge').style.color = 'var(--alert)';
                 } else {
                     document.querySelector('.dynamic-hero').innerHTML = script.h1;
-                    document.getElementById('hero-badge').innerText = "OPERATIONAL READINESS";
+                    document.getElementById('hero-badge').innerText = "VOSB // OPERATIONAL READINESS";
                     document.getElementById('hero-badge').style.borderColor = '';
                     document.getElementById('hero-badge').style.color = '';
                 }
@@ -2631,6 +2671,21 @@
         // COUNTDOWN LOGIC (Resets every 4 hours to create perpetual urgency)
         const TacticalTimer = {
             init: function() {
+                // Update capacity percentage slowly (increases urgency over time)
+                const baseCapacity = 92;
+                const capacityEl = document.getElementById('capacity-pct');
+                if(capacityEl) {
+                    setInterval(() => {
+                        const now = new Date();
+                        // Slowly increment based on minutes in current hour (92% -> 99% over 4 hours)
+                        const minutesInCycle = (now.getHours() % 4) * 60 + now.getMinutes();
+                        const maxMinutes = 4 * 60; // 4 hours
+                        const increment = Math.floor((minutesInCycle / maxMinutes) * 7); // 0-7% increase
+                        capacityEl.innerText = Math.min(99, baseCapacity + increment);
+                    }, 60000); // Update every minute
+                }
+
+                // Update timer
                 setInterval(() => {
                     const now = new Date();
                     // Create a 4-hour window block
@@ -2644,7 +2699,7 @@
                     const s = Math.floor((diff % (1000 * 60)) / 1000);
 
                     const el = document.getElementById('deploy-timer');
-                    if(el) el.innerText = `T-MINUS ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                    if(el) el.innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
                 }, 1000);
             }
         };
