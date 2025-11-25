@@ -180,7 +180,7 @@
         .audio-btn { background: transparent; border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; cursor: pointer; }
 
         /* --- HERO: BLADE RUNNER STYLE --- */
-        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; }
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; padding-bottom: 60px; }
         .dynamic-hero, .dynamic-subhero { cursor: default; pointer-events: none; }
 
         .badge {
@@ -198,7 +198,7 @@
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             line-height: 1.1;
             margin-bottom: 30px;
-            height: 3.6em; /* Fixed height prevents content jumping during typewriter */
+            min-height: auto; /* Allow natural height - no cutoff */
             text-transform: uppercase;
             background: linear-gradient(to bottom, #fff, #d0d0d0); /* Lighter gradient for mobile readability */
             -webkit-background-clip: text;
@@ -460,14 +460,14 @@
 
             /* Typography - larger for readability */
             body { font-size: 16px; padding-bottom: 60px; }
-            h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); line-height: 1.2; height: 4.2em; } /* Fixed height for mobile */
-            .hero-sub { font-size: 1rem; }
+            h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); line-height: 1.2; min-height: auto; height: auto; } /* Allow natural height - no cutoff */
+            .hero-sub { font-size: 1rem; margin-bottom: 30px; }
 
             /* Container padding */
             .container { padding: 0 16px; }
 
             /* Hero section */
-            .hero { min-height: 70vh; padding-top: 100px; }
+            .hero { min-height: auto; padding-top: 100px; padding-bottom: 40px; }
             .badge { font-size: 0.65rem; padding: 3px 10px; }
 
             /* Navigation */
@@ -548,8 +548,8 @@
 
         /* Small mobile phones */
         @media (max-width: 480px) {
-            h1 { font-size: clamp(1.5rem, 7vw, 2.2rem); height: 4.5em; } /* Fixed height for small screens */
-            .hero { min-height: 60vh; }
+            h1 { font-size: clamp(1.5rem, 7vw, 2.2rem); min-height: auto; height: auto; } /* Allow natural height - no cutoff */
+            .hero { min-height: auto; padding-bottom: 40px; }
 
             /* Calendar - 3 columns on very small screens */
             .cal-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; }
