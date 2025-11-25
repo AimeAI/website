@@ -196,13 +196,15 @@
         h1 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 30px;
             min-height: auto; /* Allow natural height - no cutoff */
+            overflow: visible; /* Ensure no text cutoff */
             text-transform: uppercase;
             background: linear-gradient(to bottom, #fff, #d0d0d0); /* Lighter gradient for mobile readability */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
         }
 
@@ -460,7 +462,7 @@
 
             /* Typography - larger for readability */
             body { font-size: 16px; padding-bottom: 60px; }
-            h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); line-height: 1.2; min-height: auto; height: auto; } /* Allow natural height - no cutoff */
+            h1 { font-size: clamp(1.6rem, 7vw, 2.5rem); line-height: 1.25; min-height: auto; height: auto; overflow: visible; } /* Allow natural height - no cutoff */
             .hero-sub { font-size: 1rem; margin-bottom: 30px; }
 
             /* Container padding */
@@ -548,7 +550,7 @@
 
         /* Small mobile phones */
         @media (max-width: 480px) {
-            h1 { font-size: clamp(1.5rem, 7vw, 2.2rem); min-height: auto; height: auto; } /* Allow natural height - no cutoff */
+            h1 { font-size: clamp(1.4rem, 6.5vw, 2rem); line-height: 1.3; min-height: auto; height: auto; overflow: visible; } /* Allow natural height - no cutoff */
             .hero { min-height: auto; padding-bottom: 40px; }
 
             /* Calendar - 3 columns on very small screens */
