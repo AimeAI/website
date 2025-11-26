@@ -2646,22 +2646,28 @@
             EDGE_HIT_THRESHOLD: 8, // 8 rapid top/bottom edge hits
             RAGE_CLICK_THRESHOLD: 4, // 4 clicks on same element in 1 second
 
+            idleTimer: null,
+            IDLE_TIMEOUT: 5 * 60 * 1000, // 5 minutes
+
             init: function() {
                 // Track rapid clicks AND rage clicks
                 document.addEventListener('click', (e) => {
                     this.trackEvent('click');
                     this.trackRageClick(e.target);
+                    this.resetIdleTimer();
                 });
 
                 // Track rapid scrolling - any scroll counts
                 document.addEventListener('wheel', (e) => {
                     // Count any wheel movement
                     this.trackEvent('scroll');
+                    this.resetIdleTimer();
                 }, { passive: true });
 
                 // Track rapid mouse movements AND edge detection
                 let mouseMoveThrottle = null;
                 document.addEventListener('mousemove', (e) => {
+                    this.resetIdleTimer();
                     if (!mouseMoveThrottle) {
                         this.trackEvent('mouseMove');
                         this.trackEdgeHit(e.clientY);
@@ -2670,6 +2676,30 @@
                         }, 100); // Throttle to every 100ms
                     }
                 });
+
+                // Track keyboard activity
+                document.addEventListener('keydown', () => this.resetIdleTimer());
+
+                // Start idle timer
+                this.resetIdleTimer();
+
+                // Also trigger when user returns to tab after being away
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        // User returned to tab - if they were idle, trigger crisis
+                        if (!this.idleTimer) {
+                            this.activateCrisisMode();
+                        }
+                    }
+                });
+            },
+
+            resetIdleTimer: function() {
+                clearTimeout(this.idleTimer);
+                this.idleTimer = setTimeout(() => {
+                    this.idleTimer = null; // Mark as idle
+                    this.activateCrisisMode();
+                }, this.IDLE_TIMEOUT);
             },
 
             trackEvent: function(type) {
