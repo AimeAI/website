@@ -2713,14 +2713,6 @@
 
                 State.log('/// CRISIS MODE ACTIVATED: RAPID USER BEHAVIOR DETECTED');
 
-                // Scroll to calendar for booking
-                setTimeout(() => {
-                    const calGrid = document.getElementById('cal-grid');
-                    if (calGrid) {
-                        calGrid.scrollIntoView({behavior: 'smooth', block: 'center'});
-                    }
-                }, 500);
-
                 // Reset counters
                 this.clickCount = 0;
                 this.scrollCount = 0;
@@ -2745,10 +2737,7 @@
             btn.style.border = "2px solid #fff";
             btn.style.background = "repeating-linear-gradient(45deg, var(--alert), var(--alert) 10px, #500 10px, #500 20px)";
 
-            // 3. Scroll to calendar
-            document.getElementById('cal-grid').scrollIntoView({behavior: 'smooth', block: 'center'});
-
-            // 4. Play sound & Flash
+            // 3. Play sound & Flash
             AudioController.play('click');
             const flash = document.createElement('div');
             flash.style.position = 'fixed'; flash.style.inset = '0';
