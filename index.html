@@ -242,6 +242,7 @@
             transition: all 0.3s;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 0 40px var(--primary-glow); }
+        .btn-bypass:hover { border-color: var(--text); color: var(--text); }
 
         .dynamic-price {
             font-family: var(--font-display); font-size: 1.5rem; color: rgba(255,255,255,0.5);
@@ -410,9 +411,10 @@
         }
 
         /* MODALS */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; }
-        .hidden { display: none !important; }
-        .term-modal { width: 90%; max-width: 600px; background: #000; border: 1px solid var(--primary); padding: 2px; box-shadow: 0 0 40px rgba(0,255,65,0.1); }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 0.2s ease-out; }
+        .overlay.hidden { opacity: 0; pointer-events: none; }
+        .term-modal { width: 90%; max-width: 600px; background: #000; border: 1px solid var(--primary); padding: 2px; box-shadow: 0 0 40px rgba(0,255,65,0.1); transform: translateY(0); transition: transform 0.2s ease-out; }
+        .overlay.hidden .term-modal { transform: translateY(-20px); }
         .term-header { background: var(--primary); color: #000; padding: 5px 10px; font-family: var(--mono-font); font-size: 0.8rem; display: flex; justify-content: space-between; }
         .term-body { padding: 20px; }
         .term-input { background: transparent; border: none; border-bottom: 1px solid #333; color: var(--primary); width: 100%; padding: 10px 0; font-family: var(--mono-font); font-size: 1rem; margin-bottom: 20px; }
@@ -610,23 +612,26 @@
 
     <div id="lead-modal" class="overlay hidden">
         <div class="term-modal">
-            <div class="term-header"><span>>> CLEARANCE REQUIRED</span><span onclick="document.getElementById('lead-modal').classList.add('hidden')">[X]</span></div>
+            <div class="term-header"><span>>> QUICK THING</span><span style="cursor:pointer;" onclick="document.getElementById('lead-modal').classList.add('hidden')">[X]</span></div>
             <div class="term-body">
-                <p style="color: var(--alert); font-family: var(--font-mono); margin-bottom: 15px;">>> RESTRICTED ARCHITECTURE. This system is classified for commercial use.</p>
-                <p style="margin-bottom: 20px;">Authenticate to bypass security protocols and access terminal.</p>
-                <input type="email" id="lead-email" class="term-input" placeholder="authorized.user@company.com">
-                <button class="btn" onclick="LeadCapture.submit()" style="width:100%;">AUTHENTICATE & BYPASS</button>
+                <p style="margin-bottom: 15px; color: var(--text); line-height: 1.5; font-size: 1.1rem;">Want updates when I ship new projects?</p>
+                <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Drop your email to get notified about new case studies, AI tools, and builds. No spam, just project drops.</p>
+                <input type="email" id="lead-email" class="term-input" placeholder="your@email.com" style="margin-bottom: 15px;">
+                <button class="btn" onclick="LeadCapture.submit()" style="width:100%; margin-bottom: 10px;">YES, KEEP ME POSTED</button>
+                <button class="btn-bypass" onclick="LeadCapture.bypass()" style="width:100%; background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 12px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;">NO THANKS, JUST SHOW ME THE WORK</button>
             </div>
         </div>
     </div>
 
     <div id="exit-modal" class="overlay hidden">
         <div class="term-modal">
-            <div class="term-header"><span>>> MISSION CRITICAL</span><span onclick="document.getElementById('exit-modal').classList.add('hidden')">[X]</span></div>
-            <div class="term-body" style="text-align: center;">
-                <h3 id="exit-title">Wait. Get the Architecture Brief.</h3>
-                <p id="exit-body" style="color: var(--text-muted);">Don't leave empty handed. Download the stack breakdown.</p>
-                <a id="exit-cta" href="mailto:mani@aimeintelligence.com?subject=Request%20Architecture%20PDF" class="btn" style="width: 100%;">REQUEST INTEL</a>
+            <div class="term-header"><span>>> BEFORE YOU GO</span><span style="cursor:pointer;" onclick="document.getElementById('exit-modal').classList.add('hidden')">[X]</span></div>
+            <div class="term-body">
+                <p style="margin-bottom: 15px; color: var(--text); line-height: 1.5; font-size: 1.1rem;">Want to see future projects?</p>
+                <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">I send occasional updates when I ship new AI tools and case studies. No spam.</p>
+                <input type="email" id="exit-email" class="term-input" placeholder="your@email.com" style="margin-bottom: 15px;">
+                <button class="btn" onclick="ExitCapture.submit()" style="width:100%; margin-bottom: 10px;">KEEP ME POSTED</button>
+                <button class="btn-bypass" onclick="document.getElementById('exit-modal').classList.add('hidden')" style="width:100%; background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 12px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;">NO THANKS</button>
             </div>
         </div>
     </div>
@@ -2312,7 +2317,10 @@
             }
         };
 
-        // 8. LEAD CAPTURE
+        // 8. LEAD CAPTURE - Uses Formspree for frictionless email delivery
+        // To set up: Create free account at formspree.io, create a form, and replace YOUR_FORM_ID below
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdkrnqvr';
+
         const LeadCapture = {
             targetUrl: '',
             request: function(d, u) {
@@ -2325,20 +2333,95 @@
                         document.getElementById('lead-modal').classList.remove('hidden');
                     }
                 } catch(e) {
-                    // If localStorage blocked, just open the link directly
                     window.open(u, '_blank');
                 }
             },
             submit: function() {
                 const email = document.getElementById('lead-email').value;
-                if(!email) return;
-                try {
-                    localStorage.setItem('aime_lead', email);
-                } catch(e) {
-                    // Silent fail
+                const input = document.getElementById('lead-email');
+                if(!email || !email.includes('@') || !email.includes('.')) {
+                    input.style.border = '1px solid var(--alert)';
+                    input.placeholder = 'Enter a valid email';
+                    setTimeout(() => { input.style.border = ''; input.placeholder = 'your@email.com'; }, 2000);
+                    return;
                 }
+
+                const btn = document.querySelector('#lead-modal .btn');
+                btn.innerText = 'TRANSMITTING...';
+                btn.disabled = true;
+
+                // Send to Formspree
+                fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        source: 'case_study_gate',
+                        case_study: this.targetUrl,
+                        timestamp: new Date().toISOString()
+                    })
+                }).then(() => {
+                    btn.innerText = 'SUBSCRIBED';
+                }).catch(() => {
+                    // Silent fail - still let them through
+                }).finally(() => {
+                    try { localStorage.setItem('aime_lead', email); } catch(e) {}
+                    setTimeout(() => {
+                        document.getElementById('lead-modal').classList.add('hidden');
+                        window.open(this.targetUrl, '_blank');
+                        btn.innerText = 'SUBSCRIBE & VIEW CASE STUDY';
+                        btn.disabled = false;
+                        document.getElementById('lead-email').value = '';
+                    }, 500);
+                });
+            },
+            bypass: function() {
+                try { localStorage.setItem('aime_lead', 'bypassed'); } catch(e) {}
                 document.getElementById('lead-modal').classList.add('hidden');
                 window.open(this.targetUrl, '_blank');
+            }
+        };
+
+        // EXIT INTENT CAPTURE
+        const ExitCapture = {
+            submit: function() {
+                const email = document.getElementById('exit-email').value;
+                const input = document.getElementById('exit-email');
+                if(!email || !email.includes('@') || !email.includes('.')) {
+                    input.style.border = '1px solid var(--alert)';
+                    input.placeholder = 'Enter a valid email';
+                    setTimeout(() => { input.style.border = ''; input.placeholder = 'your@email.com'; }, 2000);
+                    return;
+                }
+
+                const btn = document.querySelector('#exit-modal .btn');
+                btn.innerText = 'TRANSMITTING...';
+                btn.disabled = true;
+
+                fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        source: 'exit_intent',
+                        timestamp: new Date().toISOString()
+                    })
+                }).then(() => {
+                    btn.innerText = 'SUBSCRIBED — CHECK YOUR INBOX';
+                    btn.style.background = 'var(--primary)';
+                    btn.style.color = '#000';
+                }).catch(() => {
+                    btn.innerText = 'ERROR — TRY AGAIN';
+                }).finally(() => {
+                    setTimeout(() => {
+                        document.getElementById('exit-modal').classList.add('hidden');
+                        btn.innerText = 'SUBSCRIBE TO INTEL BRIEFINGS';
+                        btn.style.background = '';
+                        btn.style.color = '';
+                        btn.disabled = false;
+                        document.getElementById('exit-email').value = '';
+                    }, 1500);
+                });
             }
         };
 
@@ -3010,7 +3093,12 @@
             }
         });
 
-        document.addEventListener('mouseleave', e => { if(e.clientY<0) document.getElementById('exit-modal').classList.remove('hidden'); });
+        document.addEventListener('mouseleave', e => {
+            if(e.clientY<0 && !sessionStorage.getItem('exit_shown')) {
+                sessionStorage.setItem('exit_shown', '1');
+                document.getElementById('exit-modal').classList.remove('hidden');
+            }
+        });
         document.querySelectorAll('.btn, .card-holo, .cal-day').forEach(el => { el.addEventListener('mouseenter', ()=>AudioController.play('hover')); el.addEventListener('click', ()=>AudioController.play('click')); });
 
         // CONSOLE MESSAGE: FILTER THE WEAK
