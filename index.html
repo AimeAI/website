@@ -626,8 +626,8 @@
                 <p style="margin-bottom: 15px; color: var(--text); line-height: 1.5; font-size: 1.1rem;">Want updates when I ship new projects?</p>
                 <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Drop your email to get notified about new case studies, AI tools, and builds. No spam, just project drops.</p>
                 <input type="email" id="lead-email" class="term-input" placeholder="your@email.com" style="margin-bottom: 15px;">
-                <button class="btn" onclick="LeadCapture.submit()" style="width:100%; margin-bottom: 10px;">YES, KEEP ME POSTED</button>
-                <button class="btn-bypass" onclick="LeadCapture.bypass()" style="width:100%; background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 12px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;">NO THANKS, JUST SHOW ME THE WORK</button>
+                <button class="btn" onclick="LeadCapture.submit()" style="width:100%; margin-bottom: 15px;">YES, KEEP ME POSTED</button>
+                <button class="btn-bypass" onclick="LeadCapture.bypass()" style="width:100%; background: transparent; border: none; border-bottom: 1px solid var(--text-muted); color: var(--text); padding: 8px 0; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; transition: all 0.2s; text-decoration: none;" onmouseenter="this.style.color='var(--primary)'; this.style.borderBottomColor='var(--primary)'" onmouseleave="this.style.color='var(--text)'; this.style.borderBottomColor='var(--text-muted)'">Skip — just show me the work →</button>
             </div>
         </div>
     </div>
@@ -662,8 +662,11 @@
                 <!-- VETERAN DESIGNATOR -->
                 <span style="margin-right: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 2px 6px;">[ CAF VETERAN ]</span>
 
-                <!-- SECURITY STATUS (Transferable) -->
-                <span style="margin-right: 15px; color: var(--primary); border: 1px solid var(--primary); padding: 2px 6px; box-shadow: 0 0 5px rgba(0,255,65,0.3);">[ SEC: TRANSFERABLE ]</span>
+                <!-- SECURITY STATUS (Transferable) - Clickable, scrolls to footer -->
+                <button onclick="document.querySelector('footer').scrollIntoView({behavior:'smooth'})" style="margin-right: 15px; color: var(--primary); border: 1px solid var(--primary); padding: 2px 6px; box-shadow: 0 0 5px rgba(0,255,65,0.3); background: transparent; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.2s;" onmouseenter="this.style.boxShadow='0 0 15px rgba(0,255,65,0.5)'" onmouseleave="this.style.boxShadow='0 0 5px rgba(0,255,65,0.3)'" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">[ SEC: TRANSFERABLE ]</button>
+
+                <!-- PRIMARY NAV CTA -->
+                <a href="#cal-grid" onclick="event.preventDefault(); document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})" class="social-link" style="color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; margin-right: 10px;">AVAILABILITY</a>
 
                 <!-- TACTICAL STIMULI CONTROL -->
                 <button id="motion-toggle" class="audio-btn" onclick="MotionController.toggle()" style="margin-right: 10px; border-color: var(--alert); color: var(--alert);">STIMULI: MAX</button>
@@ -2399,13 +2402,13 @@
             },
             bypass: function() {
                 const btn = document.querySelector('#lead-modal .btn-bypass');
-                btn.innerText = 'OPENING...';
+                btn.innerText = 'Opening...';
                 btn.disabled = true;
                 try { localStorage.setItem('aime_lead', 'bypassed'); } catch(e) {}
                 setTimeout(() => {
                     document.getElementById('lead-modal').classList.add('hidden');
                     window.open(this.targetUrl, '_blank');
-                    btn.innerText = 'NO THANKS, JUST SHOW ME THE WORK';
+                    btn.innerText = 'Skip — just show me the work →';
                     btn.disabled = false;
                 }, 300);
             }
@@ -3163,11 +3166,35 @@
             }
         });
 
-        document.addEventListener('mouseleave', e => {
-            if(e.clientY<0 && !sessionStorage.getItem('exit_shown')) {
-                sessionStorage.setItem('exit_shown', '1');
-                document.getElementById('exit-modal').classList.remove('hidden');
+        // Exit intent with safe zone - don't interrupt engaged users
+        let lastHighValueClick = 0;
+        const HIGH_VALUE_SELECTORS = '.card-holo, .btn, .social-link, [onclick*="LeadCapture"]';
+        document.addEventListener('click', e => {
+            if(e.target.closest(HIGH_VALUE_SELECTORS)) {
+                lastHighValueClick = Date.now();
             }
+        });
+
+        let exitIntentTimeout = null;
+        document.addEventListener('mouseleave', e => {
+            if(e.clientY < 0 && !sessionStorage.getItem('exit_shown')) {
+                // Don't trigger if user clicked something valuable in last 60 seconds
+                if(Date.now() - lastHighValueClick < 60000) return;
+
+                // Add 500ms delay to distinguish tab-switching from exit intent
+                clearTimeout(exitIntentTimeout);
+                exitIntentTimeout = setTimeout(() => {
+                    if(!sessionStorage.getItem('exit_shown')) {
+                        sessionStorage.setItem('exit_shown', '1');
+                        document.getElementById('exit-modal').classList.remove('hidden');
+                    }
+                }, 500);
+            }
+        });
+
+        // Cancel exit intent if mouse returns quickly
+        document.addEventListener('mouseenter', () => {
+            clearTimeout(exitIntentTimeout);
         });
 
         // Mobile exit intent: scroll up at top of page after spending time on site
