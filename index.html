@@ -2652,145 +2652,12 @@
             }
         };
 
-        // 10. CRISIS MODE DETECTOR
+        // 10. CRISIS MODE - MANUAL TRIGGER ONLY
+        // Crisis mode is now opt-in only via the Emergency Deployment button
+        // No automatic behavior detection - let the user tell us they need urgent help
         const CrisisDetector = {
-            clickCount: 0,
-            scrollCount: 0,
-            mouseMoveCount: 0,
-            edgeHitCount: 0,
-            rageClickCount: 0,
-            clickTimestamps: [],
-            scrollTimestamps: [],
-            mouseMoveTimestamps: [],
-            edgeHitTimestamps: [],
-            rageClickTimestamps: [],
-            lastClickTarget: null,
-            lastClickTime: 0,
-            TIME_WINDOW: 2000, // 2 seconds
-            CLICK_THRESHOLD: 10,  // 10 clicks in 2 seconds (truly rapid clicking)
-            SCROLL_THRESHOLD: 40, // 40 wheel movements in 2 seconds (actual panic scrolling - trackpads won't trigger)
-            MOUSE_THRESHOLD: 80,  // 80 movements in 2 seconds (very frantic)
-            EDGE_HIT_THRESHOLD: 8, // 8 rapid top/bottom edge hits
-            RAGE_CLICK_THRESHOLD: 4, // 4 clicks on same element in 1 second
-
-            idleTimer: null,
-            IDLE_TIMEOUT: 5 * 60 * 1000, // 5 minutes
-
             init: function() {
-                // Track rapid clicks AND rage clicks
-                document.addEventListener('click', (e) => {
-                    this.trackEvent('click');
-                    this.trackRageClick(e.target);
-                    this.resetIdleTimer();
-                });
-
-                // Track rapid scrolling - any scroll counts
-                document.addEventListener('wheel', (e) => {
-                    // Count any wheel movement
-                    this.trackEvent('scroll');
-                    this.resetIdleTimer();
-                }, { passive: true });
-
-                // Track rapid mouse movements AND edge detection
-                let mouseMoveThrottle = null;
-                document.addEventListener('mousemove', (e) => {
-                    this.resetIdleTimer();
-                    if (!mouseMoveThrottle) {
-                        this.trackEvent('mouseMove');
-                        this.trackEdgeHit(e.clientY);
-                        mouseMoveThrottle = setTimeout(() => {
-                            mouseMoveThrottle = null;
-                        }, 100); // Throttle to every 100ms
-                    }
-                });
-
-                // Track keyboard activity
-                document.addEventListener('keydown', () => this.resetIdleTimer());
-
-                // Start idle timer
-                this.resetIdleTimer();
-
-                // Also trigger when user returns to tab after being away
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        // User returned to tab - if they were idle, trigger crisis
-                        if (!this.idleTimer) {
-                            this.activateCrisisMode();
-                        }
-                    }
-                });
-            },
-
-            resetIdleTimer: function() {
-                clearTimeout(this.idleTimer);
-                this.idleTimer = setTimeout(() => {
-                    this.idleTimer = null; // Mark as idle
-                    this.activateCrisisMode();
-                }, this.IDLE_TIMEOUT);
-            },
-
-            trackEvent: function(type) {
-                const now = Date.now();
-
-                if (type === 'click') {
-                    this.clickTimestamps.push(now);
-                    this.clickTimestamps = this.clickTimestamps.filter(t => now - t < this.TIME_WINDOW);
-                    this.clickCount = this.clickTimestamps.length;
-                } else if (type === 'scroll') {
-                    this.scrollTimestamps.push(now);
-                    this.scrollTimestamps = this.scrollTimestamps.filter(t => now - t < this.TIME_WINDOW);
-                    this.scrollCount = this.scrollTimestamps.length;
-                } else if (type === 'mouseMove') {
-                    this.mouseMoveTimestamps.push(now);
-                    this.mouseMoveTimestamps = this.mouseMoveTimestamps.filter(t => now - t < this.TIME_WINDOW);
-                    this.mouseMoveCount = this.mouseMoveTimestamps.length;
-                } else if (type === 'edgeHit') {
-                    this.edgeHitTimestamps.push(now);
-                    this.edgeHitTimestamps = this.edgeHitTimestamps.filter(t => now - t < this.TIME_WINDOW);
-                    this.edgeHitCount = this.edgeHitTimestamps.length;
-                }
-
-                // Check if crisis mode should trigger
-                if (this.clickCount >= this.CLICK_THRESHOLD ||
-                    this.scrollCount >= this.SCROLL_THRESHOLD ||
-                    this.mouseMoveCount >= this.MOUSE_THRESHOLD ||
-                    this.edgeHitCount >= this.EDGE_HIT_THRESHOLD ||
-                    this.rageClickCount >= this.RAGE_CLICK_THRESHOLD) {
-                    this.activateCrisisMode();
-                }
-            },
-
-            trackEdgeHit: function(mouseY) {
-                const EDGE_ZONE = 50; // pixels from top/bottom
-                const viewportHeight = window.innerHeight;
-
-                // Check if mouse is in top or bottom edge zone
-                if (mouseY < EDGE_ZONE || mouseY > viewportHeight - EDGE_ZONE) {
-                    this.trackEvent('edgeHit');
-                }
-            },
-
-            trackRageClick: function(target) {
-                const now = Date.now();
-
-                // If same element clicked within 1 second
-                if (this.lastClickTarget === target && now - this.lastClickTime < 1000) {
-                    this.rageClickTimestamps.push(now);
-                    this.rageClickTimestamps = this.rageClickTimestamps.filter(t => now - t < 1000);
-                    this.rageClickCount = this.rageClickTimestamps.length;
-                } else {
-                    // Reset if different target or too much time passed
-                    this.rageClickTimestamps = [now];
-                    this.rageClickCount = 1;
-                }
-
-                this.lastClickTarget = target;
-                this.lastClickTime = now;
-
-                // Check immediately for rage click crisis trigger
-                if (this.rageClickCount >= this.RAGE_CLICK_THRESHOLD) {
-                    this.activateCrisisMode();
-                }
+                // No automatic triggers - crisis mode is manual only
             },
 
             activateCrisisMode: function() {
@@ -2810,15 +2677,7 @@
                 LossTicker.currentSlide = -1;
                 LossTicker.rotateSlide();
 
-                State.log('/// CRISIS MODE ACTIVATED: RAPID USER BEHAVIOR DETECTED');
-
-                // Reset counters
-                this.clickCount = 0;
-                this.scrollCount = 0;
-                this.mouseMoveCount = 0;
-                this.clickTimestamps = [];
-                this.scrollTimestamps = [];
-                this.mouseMoveTimestamps = [];
+                State.log('/// CRISIS MODE ACTIVATED: USER REQUESTED EMERGENCY DEPLOYMENT');
             }
         };
 
