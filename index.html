@@ -606,15 +606,17 @@
 
     <div id="contact-modal" class="overlay hidden">
         <div class="term-modal">
-            <div class="term-header"><span>>> SECURE UPLINK</span><span style="cursor: pointer;" onclick="Comms.close()">[X]</span></div>
+            <div class="term-header"><span>>> GET IN TOUCH</span><span style="cursor: pointer;" onclick="Comms.close()">[X]</span></div>
             <div class="term-body">
-                <div class="term-label">IDENTITY</div>
-                <input type="text" id="contact-name" class="term-input" placeholder="Enter identification...">
-                <div class="term-label">MISSION</div>
-                <input type="text" id="contact-mission" class="term-input" placeholder="Objective...">
-                <div class="term-label">ALLOCATION</div>
-                <select id="contact-budget" class="term-input" style="background:#000;"><option value="tier1">Sprint ($7.5k)</option><option value="tier2">Architecture ($28k)</option></select>
-                <button class="btn" style="width: 100%; margin-top: 20px;" onclick="Comms.transmit()">TRANSMIT SIGNAL</button>
+                <div class="term-label">YOUR NAME</div>
+                <input type="text" id="contact-name" class="term-input" placeholder="John Smith">
+                <div class="term-label">YOUR EMAIL</div>
+                <input type="email" id="contact-email" class="term-input" placeholder="john@company.com">
+                <div class="term-label">WHAT DO YOU NEED?</div>
+                <input type="text" id="contact-mission" class="term-input" placeholder="e.g. AI dashboard, automation tool, data pipeline...">
+                <div class="term-label">BUDGET</div>
+                <select id="contact-budget" class="term-input" style="background:#000;"><option value="tier1">Sprint ($7.5k)</option><option value="tier2">Architecture ($28k)</option><option value="custom">Custom / Not sure</option></select>
+                <button class="btn" style="width: 100%; margin-top: 20px;" onclick="Comms.transmit()">SEND MESSAGE</button>
             </div>
         </div>
     </div>
@@ -2491,6 +2493,7 @@
             close: () => document.getElementById('contact-modal').classList.add('hidden'),
             transmit: function() {
                 const n = document.getElementById('contact-name').value;
+                const e = document.getElementById('contact-email').value;
                 const m = document.getElementById('contact-mission').value;
                 const b = document.getElementById('contact-budget').value;
                 const p = `VERTICAL: ${State.vertical} // PERSONA: ${State.dossier.persona}`;
@@ -2500,8 +2503,18 @@
                 const originalText = btn.innerText;
 
                 // Validation
-                if (!n || !m) {
-                    btn.innerText = ">> ERROR: NAME & PROJECT REQUIRED";
+                if (!n || !e || !m) {
+                    btn.innerText = "Please fill all fields";
+                    btn.style.background = "var(--alert)";
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = "";
+                    }, 2000);
+                    return;
+                }
+
+                if (!e.includes('@') || !e.includes('.')) {
+                    btn.innerText = "Please enter a valid email";
                     btn.style.background = "var(--alert)";
                     setTimeout(() => {
                         btn.innerText = originalText;
@@ -2512,7 +2525,7 @@
 
                 // Disable button during transmission
                 btn.disabled = true;
-                btn.innerText = "TRANSMITTING...";
+                btn.innerText = "Sending...";
                 btn.style.background = "var(--secondary)";
 
                 // Send to Formspree
@@ -2521,6 +2534,7 @@
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify({
                         name: n,
+                        email: e,
                         project: m,
                         budget: b,
                         context: p,
@@ -2529,15 +2543,15 @@
                     })
                 }).then(res => {
                     if(res.ok) {
-                        btn.innerText = ">> MESSAGE SENT";
+                        btn.innerText = "Sent! I'll be in touch.";
                         btn.style.background = "var(--primary)";
                         btn.style.color = "#000";
-                        State.log(`/// UPLINK ESTABLISHED: ${n} // ${State.vertical}`);
+                        State.log(`/// MESSAGE FROM: ${n} // ${State.vertical}`);
                     } else {
                         throw new Error('Failed');
                     }
                 }).catch(() => {
-                    btn.innerText = ">> ERROR - TRY AGAIN";
+                    btn.innerText = "Error - try again";
                     btn.style.background = "var(--alert)";
                 }).finally(() => {
                     setTimeout(() => {
@@ -2547,6 +2561,7 @@
                         btn.style.color = "";
                         btn.disabled = false;
                         document.getElementById('contact-name').value = '';
+                        document.getElementById('contact-email').value = '';
                         document.getElementById('contact-mission').value = '';
                     }, 1500);
                 });
