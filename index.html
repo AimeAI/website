@@ -106,7 +106,7 @@
         <div>TARGET: <span id="persona-label">ANALYZING...</span></div>
         <div>LOSS: $<span id="daily-loss">0</span></div>
     </div>
-    <div class="active-users"><span class="blink-dot"></span> <span id="active-count">12</span> ACTIVE PROSPECTS</div>
+    <div class="active-users" style="display:none;"><span class="blink-dot"></span> <span id="active-count">12</span> ACTIVE PROSPECTS</div>
     <div id="agent-log" class="agent-log">/// INITIALIZING AGENT...</div>
 
     <header>
@@ -133,16 +133,96 @@
         </div>
     </header>
 
+    <!-- FIXED BOOKING BAR - Always visible below header -->
+    <style>
+        .hero { padding-top: 120px !important; }
+        @media (max-width: 768px) {
+            #booking-bar { top: 48px !important; padding: 6px 0 !important; }
+            #booking-bar a { font-size: 0.7rem !important; padding: 5px 14px !important; }
+            .hero { padding-top: 110px !important; }
+        }
+    </style>
+    <div id="booking-bar" style="
+        position: fixed;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        background: rgba(2,2,3,0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0,255,65,0.15);
+        padding: 8px 0;
+        text-align: center;
+    ">
+        <a href="https://calendar.app.google/Ec8YEjQyQZxJAuQL6" target="_blank" style="
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            padding: 6px 20px;
+            border: 1px solid var(--primary);
+            background: rgba(0,255,65,0.05);
+            transition: all 0.3s;
+            display: inline-block;
+        " onmouseenter="this.style.background='rgba(0,255,65,0.15)'; this.style.boxShadow='0 0 20px rgba(0,255,65,0.3)'" onmouseleave="this.style.background='rgba(0,255,65,0.05)'; this.style.boxShadow='none'">
+            BOOK A MEETING &gt;&gt;
+        </a>
+    </div>
+
     <main>
         <section class="container hero">
-            <div class="badge" id="hero-badge">VOSB // OPERATIONAL READINESS</div>
-            <h1 class="dynamic-hero">Sovereign AI Systems.<br>Air-Gapped.<br>Deployed in 48 Hours.</h1>
-            <p class="hero-sub dynamic-subhero">No agencies. No discovery phases. Just deployment.</p>
+            <div class="badge" id="hero-badge">VETERAN-OWNED // SECURITY CLEARED // TORONTO</div>
+            <h1 class="dynamic-hero">AI Systems for Defense & Government.<br>Built. Deployed. Yours.</h1>
+            <p class="hero-sub dynamic-subhero">$7,500 fixed price. Functional proof in 48 hours. You own the code.</p>
             <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">SECURE ALLOCATION</button>
+                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">BOOK A CALL</button>
                 <div class="dynamic-price" style="font-family: var(--mono-font); font-size: 1.2rem; color: var(--text-muted);">$7,500 START</div>
             </div>
         </section>
+
+        <!-- STATIC ANCHOR LINE - Always visible -->
+        <div style="max-width: 720px; margin: 40px auto 0; text-align: center;">
+            <p style="font-family: var(--font-mono); font-size: clamp(0.85rem, 2.5vw, 1.05rem); color: #fff; line-height: 1.8; letter-spacing: 0.5px;">AI systems for defense and government clients. $7,500. 48 hours. It works or you don't pay.</p>
+        </div>
+
+        <!-- HERO CTA - Book a Meeting -->
+        <div style="
+            max-width: 720px;
+            margin: 20px auto 0;
+            padding: 30px 40px;
+            border: 2px solid var(--primary);
+            background: rgba(0,255,65,0.04);
+            box-shadow: 0 0 40px rgba(0,255,65,0.15), inset 0 0 30px rgba(0,255,65,0.03);
+            text-align: center;
+            position: relative;
+        ">
+            <div style="position: absolute; top: 0; left: 0; width: 20px; height: 20px; border-top: 3px solid var(--primary); border-left: 3px solid var(--primary);"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 20px; border-top: 3px solid var(--primary); border-right: 3px solid var(--primary);"></div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; border-bottom: 3px solid var(--primary); border-left: 3px solid var(--primary);"></div>
+            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 3px solid var(--primary); border-right: 3px solid var(--primary);"></div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary); letter-spacing: 3px; margin-bottom: 15px; opacity: 0.8;">/// DIRECT LINE TO THE BUILDER</div>
+            <h3 style="font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); color: #fff; margin-bottom: 12px; letter-spacing: 1px;">30 Minutes. No Sales Team. No Handoffs.</h3>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; max-width: 560px; margin-left: auto; margin-right: auto;">The person on the call is the person who builds your system. We'll know in 48 hours if this is worth continuing.</p>
+
+            <a href="https://calendar.app.google/Ec8YEjQyQZxJAuQL6" target="_blank" style="
+                display: inline-block;
+                padding: 16px 48px;
+                font-family: var(--font-mono);
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: #000;
+                background: var(--primary);
+                border: none;
+                letter-spacing: 2px;
+                text-decoration: none;
+                box-shadow: 0 0 30px rgba(0,255,65,0.4);
+                transition: all 0.3s;
+            " onmouseenter="this.style.boxShadow='0 0 50px rgba(0,255,65,0.7)'; this.style.transform='scale(1.03)'" onmouseleave="this.style.boxShadow='0 0 30px rgba(0,255,65,0.4)'; this.style.transform='scale(1)'">BOOK A MEETING &gt;&gt;</a>
+
+            <div style="margin-top: 18px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px;">$7,500 FIXED SCOPE &bull; IT WORKS OR YOU DON'T PAY &bull; YOU OWN THE CODE</div>
+        </div>
 
         <div id="injected-content"></div>
         
@@ -426,5 +506,6 @@
     </footer>
 
     <script src="scripts.min.js"></script>
+
 </body>
 </html>

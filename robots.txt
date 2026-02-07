@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /reset.html
+
+Sitemap: https://aimeintelligence.com/sitemap.xml
