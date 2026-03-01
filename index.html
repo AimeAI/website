@@ -1,13 +1,11 @@
 <!--
-   AIME // OPERATIONAL INTELLIGENCE
-   TARGET: HIGH-VALUE AUTOMATION
-   STATUS: ACTIVE
+   AIME // DEFENCE AI SYSTEMS INTEGRATOR
+   CLASSIFICATION: UNCLASSIFIED
+   STATUS: OPERATIONAL
 
    If you are reading this source code, you are the technical due diligence.
-   Yes, the CSS is custom. Yes, the tracking is local-only.
-   No, I don't use React for landing pages.
-
-   Let's ship.
+   Yes, the CSS is custom. Yes, the architecture is sovereign-capable.
+   No framework dependencies. No vendor lock-in.
 
    mailto:mani@aimeintelligence.com
 -->
@@ -25,22 +23,22 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Operational AI Systems. Deployed in 48 hours. Defense & Critical Infrastructure.">
-    <title>AIME | Defense-Grade Automation</title>
+    <meta name="description" content="Sovereign AI Systems Integration for Defence & Critical Infrastructure. DDIL-Capable. NIST 800-53 Aligned.">
+    <title>AIME | Defence AI Systems Integrator</title>
 
     <!-- SOCIAL PREVIEW / OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.aimeintelligence.com/">
-    <meta property="og:title" content="AIME | Operational AI Systems">
-    <meta property="og:description" content="Sovereign AI Systems. Air-Gapped. Deployed in 48 Hours. Defense & Critical Infrastructure.">
+    <meta property="og:title" content="AIME | Defence AI Systems Integrator">
+    <meta property="og:description" content="Sovereign AI Systems Integration. DDIL-Capable Architecture. Rapid Capability Prototyping for Defence & Government.">
     <meta property="og:image" content="https://www.aimeintelligence.com/og-image.jpg">
 
     <!-- TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="aimeintelligence.com">
     <meta property="twitter:url" content="https://www.aimeintelligence.com/">
-    <meta name="twitter:title" content="AIME | Operational AI Systems">
-    <meta name="twitter:description" content="Sovereign AI Systems. Air-Gapped. Deployed in 48 Hours.">
+    <meta name="twitter:title" content="AIME | Defence AI Systems Integrator">
+    <meta name="twitter:description" content="Sovereign AI Systems Integration. DDIL-Capable. Rapid Capability Prototyping.">
     <meta name="twitter:image" content="https://www.aimeintelligence.com/og-image.jpg">
 
     <!-- PRELOAD CRITICAL RESOURCES -->
@@ -56,48 +54,9 @@
 </head>
 <body>
 
-    <div id="contact-modal" class="overlay hidden">
-        <div class="term-modal">
-            <div class="term-header"><span>>> GET IN TOUCH</span><span style="cursor: pointer;" onclick="Comms.close()">[X]</span></div>
-            <div class="term-body">
-                <div class="term-label">YOUR NAME</div>
-                <input type="text" id="contact-name" class="term-input" placeholder="John Smith">
-                <div class="term-label">YOUR EMAIL</div>
-                <input type="email" id="contact-email" class="term-input" placeholder="john@company.com">
-                <div class="term-label">WHAT DO YOU NEED?</div>
-                <input type="text" id="contact-mission" class="term-input" placeholder="e.g. AI dashboard, automation tool, data pipeline...">
-                <div class="term-label">BUDGET</div>
-                <select id="contact-budget" class="term-input" style="background:#000;"><option value="tier1">Sprint ($7.5k)</option><option value="tier2">Architecture ($28k)</option><option value="custom">Custom / Not sure</option></select>
-                <button class="btn" style="width: 100%; margin-top: 20px;" onclick="Comms.transmit()">SEND MESSAGE</button>
-            </div>
-        </div>
-    </div>
+    <!-- Contact modal removed — all CTAs route to Google Calendar for zero-friction booking -->
 
-    <div id="lead-modal" class="overlay hidden">
-        <div class="term-modal">
-            <div class="term-header"><span>>> QUICK THING</span><span style="cursor:pointer;" onclick="document.getElementById('lead-modal').classList.add('hidden')">[X]</span></div>
-            <div class="term-body">
-                <p style="margin-bottom: 15px; color: var(--text); line-height: 1.5; font-size: 1.1rem;">Want updates when I ship new projects?</p>
-                <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Drop your email to get notified about new case studies, AI tools, and builds. No spam, just project drops.</p>
-                <input type="email" id="lead-email" class="term-input" placeholder="your@email.com" style="margin-bottom: 15px;">
-                <button class="btn" onclick="LeadCapture.submit()" style="width:100%; margin-bottom: 15px;">YES, KEEP ME POSTED</button>
-                <button class="btn-bypass" onclick="LeadCapture.bypass()" style="width:100%; background: transparent; border: none; border-bottom: 1px solid var(--text-muted); color: var(--text); padding: 8px 0; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; transition: all 0.2s; text-decoration: none;" onmouseenter="this.style.color='var(--primary)'; this.style.borderBottomColor='var(--primary)'" onmouseleave="this.style.color='var(--text)'; this.style.borderBottomColor='var(--text-muted)'">Skip — just show me the work →</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="exit-modal" class="overlay hidden">
-        <div class="term-modal">
-            <div class="term-header"><span>>> BEFORE YOU GO</span><span style="cursor:pointer;" onclick="document.getElementById('exit-modal').classList.add('hidden')">[X]</span></div>
-            <div class="term-body">
-                <p style="margin-bottom: 15px; color: var(--text); line-height: 1.5; font-size: 1.1rem;">Want to see future projects?</p>
-                <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">I send occasional updates when I ship new AI tools and case studies. No spam.</p>
-                <input type="email" id="exit-email" class="term-input" placeholder="your@email.com" style="margin-bottom: 15px;">
-                <button class="btn" onclick="ExitCapture.submit()" style="width:100%; margin-bottom: 10px;">KEEP ME POSTED</button>
-                <button class="btn-bypass" onclick="document.getElementById('exit-modal').classList.add('hidden')" style="width:100%; background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 12px; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.2s;">NO THANKS</button>
-            </div>
-        </div>
-    </div>
+    <!-- Lead capture and exit modals removed — zero friction, calendar link only -->
 
     <div class="scanlines"></div>
     <div class="bg-grid"></div>
@@ -111,10 +70,10 @@
 
     <header>
         <div class="container nav-flex">
-            <div class="logo">AIME // INTEL</div>
+            <div class="logo"><img src="logo-nav.png" alt="AIME Intelligence" style="height: 48px; vertical-align: middle;"></div>
             <div class="mono" style="font-size: 0.7rem; display: flex; align-items: center;">
                 <!-- VETERAN DESIGNATOR - Opens contact form -->
-                <button onclick="Comms.open()" style="margin-right: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 2px 6px; background: transparent; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.2s;" onmouseenter="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'" onmouseleave="this.style.borderColor='var(--text-muted)'; this.style.color='var(--text-muted)'">[ CAF VETERAN ]</button>
+                <button onclick="window.open('https://calendar.app.google/Ec8YEjQyQZxJAuQL6','_blank')" style="margin-right: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 2px 6px; background: transparent; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.2s;" onmouseenter="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'" onmouseleave="this.style.borderColor='var(--text-muted)'; this.style.color='var(--text-muted)'">[ CAF VETERAN ]</button>
 
                 <!-- SECURITY STATUS (Transferable) - Clickable, scrolls to footer -->
                 <button onclick="document.querySelector('footer').scrollIntoView({behavior:'smooth'})" style="margin-right: 15px; color: var(--primary); border: 1px solid var(--primary); padding: 2px 6px; box-shadow: 0 0 5px rgba(0,255,65,0.3); background: transparent; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.2s;" onmouseenter="this.style.boxShadow='0 0 15px rgba(0,255,65,0.5)'" onmouseleave="this.style.boxShadow='0 0 5px rgba(0,255,65,0.3)'" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">[ SEC: TRANSFERABLE ]</button>
@@ -166,24 +125,24 @@
             transition: all 0.3s;
             display: inline-block;
         " onmouseenter="this.style.background='rgba(0,255,65,0.15)'; this.style.boxShadow='0 0 20px rgba(0,255,65,0.3)'" onmouseleave="this.style.background='rgba(0,255,65,0.05)'; this.style.boxShadow='none'">
-            BOOK A MEETING &gt;&gt;
+            BOOK A SCOPING SESSION &gt;&gt;
         </a>
     </div>
 
     <main>
         <section class="container hero">
             <div class="badge" id="hero-badge">VETERAN-OWNED // SECURITY CLEARED // TORONTO</div>
-            <h1 class="dynamic-hero">AI Systems for Defense & Government.<br>Built. Deployed. Yours.</h1>
-            <p class="hero-sub dynamic-subhero">$7,500 fixed price. Functional proof in 48 hours. You own the code.</p>
+            <h1 class="dynamic-hero">AI Systems Integration for Defence & Government.<br>Prototyped. Validated. Sovereign.</h1>
+            <p class="hero-sub dynamic-subhero">48-Hour Tactical Capability Prototyping. Total IP Ownership. DDIL-Ready Architecture.</p>
             <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">BOOK A CALL</button>
-                <div class="dynamic-price" style="font-family: var(--mono-font); font-size: 1.2rem; color: var(--text-muted);">$7,500 START</div>
+                <button class="btn" id="primary-cta" onclick="document.getElementById('cal-grid').scrollIntoView({behavior:'smooth', block:'center'})">REQUEST CAPABILITY BRIEF</button>
+                <div class="dynamic-price" style="font-family: var(--mono-font); font-size: 1.2rem; color: var(--text-muted);">RAPID PROTOTYPING</div>
             </div>
         </section>
 
         <!-- STATIC ANCHOR LINE - Always visible -->
         <div style="max-width: 720px; margin: 40px auto 0; text-align: center;">
-            <p style="font-family: var(--font-mono); font-size: clamp(0.85rem, 2.5vw, 1.05rem); color: #fff; line-height: 1.8; letter-spacing: 0.5px;">AI systems for defense and government clients. $7,500. 48 hours. It works or you don't pay.</p>
+            <p style="font-family: var(--font-mono); font-size: clamp(0.85rem, 2.5vw, 1.05rem); color: #fff; line-height: 1.8; letter-spacing: 0.5px;">You have a capability gap. Provide isolated unclassified data. Working prototype in 48 hours. You validate the capability, then we integrate.</p>
         </div>
 
         <!-- HERO CTA - Book a Meeting -->
@@ -202,9 +161,9 @@
             <div style="position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; border-bottom: 3px solid var(--primary); border-left: 3px solid var(--primary);"></div>
             <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; border-bottom: 3px solid var(--primary); border-right: 3px solid var(--primary);"></div>
 
-            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary); letter-spacing: 3px; margin-bottom: 15px; opacity: 0.8;">/// DIRECT LINE TO THE BUILDER</div>
-            <h3 style="font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); color: #fff; margin-bottom: 12px; letter-spacing: 1px;">30 Minutes. No Sales Team. No Handoffs.</h3>
-            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; max-width: 560px; margin-left: auto; margin-right: auto;">The person on the call is the person who builds your system. We'll know in 48 hours if this is worth continuing.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary); letter-spacing: 3px; margin-bottom: 15px; opacity: 0.8;">/// PRINCIPAL ENGINEER — DIRECT</div>
+            <h3 style="font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); color: #fff; margin-bottom: 12px; letter-spacing: 1px;">30-Minute Technical Scoping. No Intermediaries.</h3>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; max-width: 560px; margin-left: auto; margin-right: auto;">Speak directly with the systems architect who builds and deploys. We scope the capability gap, define success criteria, and determine feasibility — before any commitment.</p>
 
             <a href="https://calendar.app.google/Ec8YEjQyQZxJAuQL6" target="_blank" style="
                 display: inline-block;
@@ -219,9 +178,9 @@
                 text-decoration: none;
                 box-shadow: 0 0 30px rgba(0,255,65,0.4);
                 transition: all 0.3s;
-            " onmouseenter="this.style.boxShadow='0 0 50px rgba(0,255,65,0.7)'; this.style.transform='scale(1.03)'" onmouseleave="this.style.boxShadow='0 0 30px rgba(0,255,65,0.4)'; this.style.transform='scale(1)'">BOOK A MEETING &gt;&gt;</a>
+            " onmouseenter="this.style.boxShadow='0 0 50px rgba(0,255,65,0.7)'; this.style.transform='scale(1.03)'" onmouseleave="this.style.boxShadow='0 0 30px rgba(0,255,65,0.4)'; this.style.transform='scale(1)'">BOOK A SCOPING SESSION &gt;&gt;</a>
 
-            <div style="margin-top: 18px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px;">$7,500 FIXED SCOPE &bull; IT WORKS OR YOU DON'T PAY &bull; YOU OWN THE CODE</div>
+            <div style="margin-top: 18px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px;">FIXED-SCOPE CAPABILITY FEASIBILITY &bull; SOVEREIGN IP OWNERSHIP &bull; DDIL-CAPABLE ARCHITECTURE</div>
         </div>
 
         <div id="injected-content"></div>
@@ -229,8 +188,8 @@
         <section class="container" id="doctrine-section" style="margin-top: 80px;">
             <div class="grid-header" id="doctrine-header">/// AIME CAPABILITY DOCTRINE</div>
             <div style="margin-bottom: 40px; max-width: 800px;">
-                <h2 id="doctrine-title" style="font-size: 2rem; margin-bottom: 15px;">AIME is not an agency.<br>We are an Autonomous Operational Unit.</h2>
-                <p id="doctrine-sub" style="color: var(--text-muted);">Agencies sell you "Discovery Phases" because they don't know how to build your system yet. We ship pre-validated architectures in 48 hours with 10,000+ hours of operational infrastructure already built.</p>
+                <h2 id="doctrine-title" style="font-size: 2rem; margin-bottom: 15px;">AIME is not an agency.<br>We are a Defence AI Systems Integrator.</h2>
+                <p id="doctrine-sub" style="color: var(--text-muted);">Traditional vendors sell "Discovery Phases" because they haven't built your architecture yet. We deploy pre-validated, sovereign-capable systems as 48-Hour Tactical Capability Prototypes — then integrate to your operational environment.</p>
             </div>
             
             <div class="capability-grid" id="capability-grid">
@@ -239,21 +198,21 @@
 
         <section class="container" id="loss-section">
             <div class="loss-ticker">
-                <div class="mono" id="loss-label" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">/// OPPORTUNITY COST ANALYSIS</div>
-                <h3 id="loss-headline" style="color: var(--alert); transition: opacity 0.3s;">Every Day You Wait Costs:</h3>
+                <div class="mono" id="loss-label" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">/// CAPABILITY GAP COST ANALYSIS</div>
+                <h3 id="loss-headline" style="color: var(--alert); transition: opacity 0.3s;">Estimated Cost of Delayed Capability Deployment:</h3>
                 <div class="loss-val">$<span id="ticker-val">0</span></div>
-                <p id="loss-context" class="mono" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; min-height: 60px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; transition: opacity 0.3s;">Based on real-time competitor velocity.</p>
+                <p id="loss-context" class="mono" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; min-height: 60px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; transition: opacity 0.3s;">Based on sector-average manual process overhead and threat response latency.</p>
             </div>
         </section>
 
         <section class="container">
-            <div class="grid-header">/// ACTIVE INTELLIGENCE FEEDS</div>
+            <div class="grid-header">/// RECENT DEPLOYED CAPABILITIES</div>
             <div class="grid">
                 <div class="card-holo card-skyguard" data-semantic="DEFENSE">
                     <div class="card-content">
                         <div class="card-top"><span class="card-label">DEFENSE</span><span class="card-live" style="color: #FFB000;"><div class="blink-dot" style="background: #FFB000;"></div> TRL 5</span></div>
                         <h3>SkyGuard Tactical</h3>
-                        <p>Passive acoustic air defense. 15ms latency, edge-native. $0 open source → $2,499 evaluation node.</p>
+                        <p>Passive acoustic air defense. 15ms latency, edge-native. DDIL-capable sensor fusion architecture.</p>
                         <div class="live-metric">>> DEPLOYMENT: Field evaluation ready | ATAK-native</div>
                         <div class="card-actions">
                             <button onclick="LeadCapture.request('SkyGuard', 'https://skyguard-tactical-nt0sfkp59-aimeintelligence-gmailcoms-projects.vercel.app')" class="btn-sm btn-fill">VIEW DEMO ↗</button>
@@ -267,9 +226,9 @@
                             <span class="card-label">LOGISTICS</span>
                             <span class="card-live"><div class="blink-dot"></div> 237 NODES</span>
                         </div>
-                        <h3>Logistics & Human Capital</h3>
-                        <p>Workforce Optimization Platform. Route Planning. Resource Allocation.</p>
-                        <div class="live-metric">>> ACTIVE ROUTES: <span id="metric-vet">412</span></div>
+                        <h3>Vet_Link Ops</h3>
+                        <p>Human Capital Logistics Platform. MOS-to-Civilian Doctrine Translation. Clearance-Indexed Workforce Matching.</p>
+                        <div class="live-metric">>> EMPLOYER NODES: <span id="metric-vet">237</span></div>
                         <div class="card-actions">
                             <button onclick="LeadCapture.request('Logistics', 'https://veteran-job-portal.vercel.app/')" class="btn-sm btn-fill">LAUNCH DEMO ↗</button>
                             <button class="btn-sm btn-outline" onclick="SalesEngine.trackIntent('LOGISTICS', 'veteran-intel.html')">INTEL DOSSIER</button>
@@ -307,13 +266,13 @@
         </section>
 
         <section class="container" style="margin-top: 80px;">
-            <div class="grid-header" id="build-buy-header">/// THE $2M QUESTION</div>
+            <div class="grid-header" id="build-buy-header">/// BUILD vs. BUY: CAPABILITY ACQUISITION ANALYSIS</div>
             <div class="matrix-grid" id="matrix-container">
                 </div>
         </section>
 
         <section class="container" style="margin-top: 80px;">
-            <div class="grid-header" style="font-size: 1rem; border-bottom: 2px solid var(--primary); text-shadow: 0 0 20px var(--primary-glow);">/// THE 49TH HOUR PROTOCOL™</div>
+            <div class="grid-header" style="font-size: 1rem; border-bottom: 2px solid var(--primary); text-shadow: 0 0 20px var(--primary-glow);">/// CAPABILITY FEASIBILITY GUARANTEE</div>
             <div style="
                 background: linear-gradient(135deg, rgba(0,255,65,0.08) 0%, rgba(0,255,65,0.02) 100%);
                 border: 2px solid var(--primary);
@@ -338,7 +297,7 @@
                     animation: pulse-glow 2s ease-in-out infinite;
                     word-wrap: break-word;
                     overflow-wrap: break-word;
-                ">FINANCIAL RISK: ZERO.</h2>
+                ">FIXED-SCOPE. VALIDATED. NO RESIDUAL RISK.</h2>
 
                 <p style="
                     font-size: clamp(1rem, 3vw, 1.2rem);
@@ -346,7 +305,7 @@
                     color: #fff;
                     font-weight: 500;
                     letter-spacing: 0.5px;
-                ">If your prototype is not demonstrably functional by Hour 49:</p>
+                ">If the prototype does not demonstrate operational feasibility within the agreed scope:</p>
 
                 <ul style="
                     list-style: none;
@@ -358,13 +317,13 @@
                     font-weight: 600;
                 ">
                     <li style="padding: 10px 0; border-left: 4px solid var(--primary); padding-left: 20px; margin-bottom: 15px; background: rgba(0,255,65,0.05);">
-                        [1] You receive a <span style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary-glow);">100% REFUND</span> immediately.
+                        [1] <span style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary-glow);">NO OBLIGATION</span> — Feasibility not proven means no engagement proceeds.
                     </li>
                     <li style="padding: 10px 0; border-left: 4px solid var(--primary); padding-left: 20px; margin-bottom: 15px; background: rgba(0,255,65,0.05);">
-                        [2] You retain all <span style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary-glow);">CUSTOM SOURCE CODE</span> generated.
+                        [2] <span style="color: var(--primary); font-size: 1.2rem; text-shadow: 0 0 10px var(--primary-glow);">TOTAL SOVEREIGN IP OWNERSHIP</span> — All source code, models, and architectures transfer to you.
                     </li>
                     <li style="padding: 10px 0; border-left: 4px solid var(--primary); padding-left: 20px; background: rgba(0,255,65,0.08);">
-                        [3] A portion of proceeds <span style="color: var(--primary); font-size: 1.3rem; font-weight: bold; text-shadow: 0 0 15px var(--primary-glow);">supports Veteran organizations</span>.
+                        [3] <span style="color: var(--primary); font-size: 1.3rem; font-weight: bold; text-shadow: 0 0 15px var(--primary-glow);">VENDOR INDEPENDENCE</span> — No lock-in. No recurring licences. Complete handoff documentation.
                     </li>
                 </ul>
 
@@ -385,21 +344,21 @@
                         position: relative;
                         overflow: hidden;
                     ">
-                        <span style="position: relative; z-index: 2;">⚠ DEPLOY NOW - EMERGENCY RESPONSE</span>
+                        <span style="position: relative; z-index: 2;">⚠ REQUEST RAPID PROTOTYPING SPRINT</span>
                     </button>
                     <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #FF0000; margin-top: 10px; opacity: 0.8;">
-                        [ TRIGGERS IMMEDIATE 48-HOUR DEPLOYMENT PROTOCOL ]
+                        [ INITIATES 48-HOUR TACTICAL CAPABILITY PROTOTYPE ]
                     </div>
                 </div>
 
                 <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <a href="parameters.html" class="btn" style="
+                    <a href="capability-brief.html" class="btn" style="
                         display: inline-block;
                         padding: 18px 40px;
                         font-size: 1rem;
                         animation: pulse-glow 2s ease-in-out infinite;
                     ">
-                        VIEW ENGAGEMENT PARAMETERS >>
+                        REQUEST SOW / CAPABILITY BRIEF >>
                     </a>
                 </div>
             </div>
@@ -409,13 +368,13 @@
             <!-- CRISIS MODE COUNTDOWN TIMER (Hidden by default, shown when crisis mode active) -->
             <div id="crisis-timer" style="display: none; background: #FF0000; border: 3px solid #FF0000; padding: 30px; margin-bottom: 40px; text-align: center; box-shadow: 0 0 50px rgba(255,0,0,0.8); animation: crisis-pulse 0.2s infinite alternate;">
                 <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #000; font-weight: bold; margin-bottom: 10px; letter-spacing: 2px;">
-                    ⚠ CRISIS MODE ACTIVATED ⚠
+                    ⚠ PRIORITY ENGAGEMENT ACTIVATED ⚠
                 </div>
                 <div style="font-family: var(--font-display); font-size: 2.5rem; color: #000; font-weight: bold; margin-bottom: 10px;">
-                    IMMEDIATE DEPLOYMENT AVAILABLE
+                    RAPID PROTOTYPING SPRINT AVAILABLE
                 </div>
                 <div style="font-family: var(--font-mono); font-size: 1rem; color: #000; opacity: 0.9;">
-                    EMERGENCY 48-HOUR PROTOCOL ENABLED • SKIP THE QUEUE
+                    48-HOUR TACTICAL CAPABILITY PROTOTYPE • PRIORITY ALLOCATION
                 </div>
             </div>
 
@@ -424,30 +383,30 @@
                 <div class="crisis-panel">
                     <!-- THE TIMER -->
                     <div class="tactical-timer">
-                        <span class="blink text-warn">/// CURRENT CYCLE CAPACITY: <span id="capacity-pct">92</span>% FULL</span>
+                        <span class="blink text-warn">/// CURRENT QUARTER ALLOCATION: <span id="capacity-pct">92</span>% COMMITTED</span>
                         <div style="margin-top: 8px;">
-                            <span style="font-size: 0.9rem; color: var(--text-muted);">NEXT DEPLOYMENT WINDOW CLOSES IN:</span>
+                            <span style="font-size: 0.9rem; color: var(--text-muted);">NEXT AVAILABLE ENGAGEMENT WINDOW:</span>
                             <span id="deploy-timer" class="font-mono text-warn" style="font-size: 1.5rem; font-weight: 700; display: block; margin-top: 4px;">03:59:59</span>
                         </div>
                     </div>
 
                     <!-- THE BIG RED BUTTON -->
                     <button class="btn-crisis" onclick="ManualCrisisTrigger()">
-                        <span class="glitch-text">⚠️ INITIATE IMMEDIATE DEPLOYMENT</span>
-                        <div class="btn-sub">PRIORITY SURGE PROTOCOL // BYPASS QUEUE</div>
+                        <span class="glitch-text">⚠️ REQUEST PRIORITY ENGAGEMENT</span>
+                        <div class="btn-sub">RAPID CAPABILITY PROTOTYPING // PRIORITY ALLOCATION</div>
                     </button>
                 </div>
             </div>
 
-            <div class="grid-header">/// OPERATIONAL CAPACITY</div>
+            <div class="grid-header">/// ENGAGEMENT AVAILABILITY</div>
             <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
                 <div>
-                    <h2 id="cal-header">Secure Your Window</h2>
-                    <p class="mono text-muted" id="pricing-context">Dynamic pricing based on load.</p>
+                    <h2 id="cal-header">Reserve a Scoping Session</h2>
+                    <p class="mono text-muted" id="pricing-context">Availability based on current commitments.</p>
                 </div>
                 <div style="text-align: right;">
-                    <div class="dynamic-price" style="font-size: 2.5rem; font-weight: bold; color: var(--primary);">$7,500</div>
-                    <div class="mono text-muted">BASE ENGAGEMENT</div>
+                    <div class="dynamic-price" style="font-size: 1.8rem; font-weight: bold; color: var(--primary);">REQUEST SOW</div>
+                    <div class="mono text-muted">FOR SCOPE & PRICING</div>
                 </div>
             </div>
             <div style="border: 1px solid var(--border); padding: 20px; background: var(--surface);">
@@ -461,27 +420,27 @@
         </section>
 
         <section class="container" style="margin-top: 80px;">
-            <div class="grid-header">/// POST-DEPLOYMENT OVERWATCH</div>
+            <div class="grid-header">/// POST-DEPLOYMENT SUSTAINMENT</div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 <div style="border: 1px solid var(--text-muted); padding: 30px; opacity: 0.7;">
-                    <h3>Self-Managed</h3>
-                    <div style="font-size: 2rem; font-weight: bold; margin: 20px 0;">$0/mo</div>
+                    <h3>Sovereign Self-Managed</h3>
+                    <div style="font-size: 1.4rem; font-weight: bold; margin: 20px 0;">FULL HANDOFF</div>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; color: var(--text-muted);">
-                        <li>❌ You handle crashes at 3am</li>
-                        <li>❌ You scale infrastructure</li>
-                        <li>❌ No compliance reports</li>
+                        <li>▸ Complete source code & documentation</li>
+                        <li>▸ Your team assumes operational control</li>
+                        <li>▸ Zero vendor dependency</li>
                     </ul>
                 </div>
                 <div style="border: 2px solid var(--primary); padding: 30px; background: rgba(0,255,65,0.05);">
                     <div style="background: var(--primary); color: #000; padding: 2px 10px; font-size: 0.7rem; display: inline-block; font-weight: bold; margin-bottom: 10px;">RECOMMENDED</div>
-                    <h3 style="color: var(--primary);">Operational Overwatch</h3>
-                    <div style="font-size: 2rem; font-weight: bold; margin: 20px 0; color: var(--primary);">$2,500/mo</div>
+                    <h3 style="color: var(--primary);">Operational Sustainment</h3>
+                    <div style="font-size: 1.4rem; font-weight: bold; margin: 20px 0; color: var(--primary);">RETAINER — REQUEST SOW</div>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; color: var(--text-main);">
-                        <li>✅ 15-min emergency response</li>
-                        <li>✅ Auto-scaling included</li>
-                        <li>✅ Compliance reports</li>
+                        <li>✅ Priority incident response (SLA-defined)</li>
+                        <li>✅ Infrastructure scaling & monitoring</li>
+                        <li>✅ NIST 800-53 compliance reporting</li>
                     </ul>
-                    <button class="btn" style="width: 100%; margin-top: 20px;" onclick="Comms.open()">SECURE YOUR SYSTEM</button>
+                    <button class="btn" style="width: 100%; margin-top: 20px;" onclick="window.open('https://calendar.app.google/Ec8YEjQyQZxJAuQL6','_blank')">REQUEST SUSTAINMENT SOW</button>
                 </div>
             </div>
         </section>
@@ -492,20 +451,161 @@
     <footer style="margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0 60px 0; background: rgba(0,0,0,0.3);">
         <div class="container" style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-align: center;">
             <div style="margin-bottom: 15px; color: var(--primary); font-weight: bold; letter-spacing: 1px;">
-                STATUS: VETERAN-OWNED SMALL BUSINESS (VOSB)
+                STATUS: VETERAN-OWNED // CAF // SECURITY CLEARED (PSPC)
             </div>
             <div style="line-height: 1.8;">
-                PROCUREMENT: <span style="color: #fff;">PROSERVICES QUALIFICATION IN PROGRESS</span><br>
-                COMPLIANCE: <span style="color: #fff;">NIST 800-53 ALIGNED ARCHITECTURE</span><br>
-                SECURITY CLEARANCE: <span style="color: #fff;">TRANSFERABLE VIA PSPC</span>
+                PROCUREMENT VEHICLE: <span style="color: #fff;">SOLE-SOURCE ELIGIBLE (UNDER THRESHOLD) / PROSERVICES</span><br>
+                COMPLIANCE: <span style="color: #fff;">NIST 800-53 ALIGNED / DDIL-CAPABLE ARCHITECTURE</span><br>
+                CLEARANCE: <span style="color: #fff;">ACTIVE — TRANSFERABLE VIA PSPC</span>
             </div>
             <div style="margin-top: 20px; opacity: 0.6;">
-                DESIGNED BY 25 SERVICE BATTALION VETERAN | CANADIAN ARMED FORCES
+                25 SERVICE BATTALION | MSE OPERATOR | CANADIAN ARMED FORCES (2005–2011)
             </div>
         </div>
     </footer>
 
     <script src="scripts.min.js"></script>
+
+    <!-- COPY OVERRIDES: Strip pricing, redirect forms to calendar, clean hero rotations -->
+    <script>
+    (function(){
+        var CAL = 'https://calendar.app.google/Ec8YEjQyQZxJAuQL6';
+
+        // 1. ALL contact/form actions → calendar link
+        if(typeof Comms !== 'undefined'){
+            Comms.open = function(){ window.open(CAL, '_blank'); };
+            Comms.close = function(){};
+            Comms.transmit = function(){ window.open(CAL, '_blank'); };
+        }
+
+        // 2. Kill lead capture & exit modals
+        if(typeof LeadCapture !== 'undefined'){
+            LeadCapture.show = function(){};
+            LeadCapture.init = function(){};
+            LeadCapture.request = function(label, url){ window.open(url, '_blank'); };
+        }
+        if(typeof ExitCapture !== 'undefined'){
+            ExitCapture.show = function(){};
+            ExitCapture.init = function(){};
+        }
+
+        // 3. Patch HeroRotator — keep original h1 headlines, only fix subs with pricing
+        if(typeof HeroRotator !== 'undefined'){
+            HeroRotator.messages = {
+                COMMANDER: [
+                    {h1:"AI Systems for Defense & Government.<br>Built. Deployed. Yours.", sub:"48-Hour Tactical Capability Prototyping. You own the code. Sovereign IP.", sticky:true},
+                    {h1:"48-Hour Proof of Concept.<br>Feasibility Validated Before Commitment.", sub:"Deployed for Wounded Warriors Canada. 90% time reduction. Real results."},
+                    {h1:"Security Cleared. Veteran-Owned.<br>Direct to the Builder.", sub:"No sales team. No handoffs. The person on the call builds your system."},
+                    {h1:"Under Discretionary Spend.<br>No Committee Required.", sub:"Sole-source eligible. A program manager can authorize this today."}
+                ],
+                TECHNICAL_DECISION_MAKER: [
+                    {h1:"AI Systems for Defense & Government.<br>Built. Deployed. Yours.", sub:"48-Hour Tactical Capability Prototyping. You own the code. Sovereign IP."},
+                    {h1:"48-Hour Proof of Concept.<br>Feasibility Validated Before Commitment.", sub:"No sales team. No handoffs. The person on the call builds your system."}
+                ],
+                CRISIS_BUYER: [
+                    {h1:"System Critical?<br>We Deploy in 48 Hours.", sub:"Provide isolated unclassified data. Working prototype in 48 hours. Direct to the builder."},
+                    {h1:"48-Hour Proof of Concept.<br>Feasibility Validated Before Commitment.", sub:"No sales team. No handoffs. Direct to the builder."}
+                ],
+                ENTERPRISE_EXECUTIVE: [
+                    {h1:"Security Cleared. Veteran-Owned.<br>Direct to the Builder.", sub:"Sole-source eligible. A program manager can authorize this today."},
+                    {h1:"Under Discretionary Spend.<br>No Committee Required.", sub:"Deployed for Wounded Warriors Canada. 90% time reduction. Real results."}
+                ]
+            };
+        }
+
+        // 4. Patch Renderer scripts — keep original h1/doc variety, only strip pricing from subs
+        if(typeof Renderer !== 'undefined' && Renderer.scripts){
+            // GENERAL — only sub had "$7,500"
+            Renderer.scripts.GENERAL.sub = "48-Hour Tactical Capability Prototyping. You own the code. Sovereign IP.";
+            Renderer.scripts.GENERAL.doc_title = "48-Hour Prototypes. You Own the Code.";
+            Renderer.scripts.GENERAL.doc_sub = "Most agencies take 6 months to discover what we build in 48 hours. Fixed-scope feasibility. You own everything.";
+            // DEFENSE — sub had "$7,500"
+            Renderer.scripts.DEFENSE.sub = "48-Hour Tactical Capability Prototyping. You own the code. DDIL-Ready.";
+            // DEFENSE doc_title + doc_sub were already good — keep them
+            // LOGISTICS — no pricing, already clean
+            // FINANCE — sub had "$7,500"
+            Renderer.scripts.FINANCE.sub = "Sole-source eligible. A program manager can authorize this today.";
+            // CYBER — no pricing, already clean
+        }
+
+        // 5. Override Calendar — hide per-slot pricing, link slots to Google Calendar
+        if(typeof Calendar !== 'undefined'){
+            var origRender = Calendar.render.bind(Calendar);
+            Calendar.render = function(){
+                origRender();
+                document.querySelectorAll('.cal-price').forEach(function(el){ el.style.display = 'none'; });
+                var ctx = document.getElementById('pricing-context');
+                if(ctx) ctx.textContent = 'Availability based on current commitments.';
+                document.querySelectorAll('.dynamic-price').forEach(function(el){
+                    if(el.textContent.indexOf('$') !== -1){
+                        el.innerHTML = '<span>REQUEST SOW</span> <span style="font-size:0.5em; color:var(--text-muted)">FOR SCOPE & PRICING</span>';
+                    }
+                });
+                document.querySelectorAll('#cal-grid .cal-day').forEach(function(el){
+                    el.onclick = function(){ window.open(CAL, '_blank'); };
+                });
+            };
+        }
+
+        // 6. Catch any DOM-injected pricing (INVESTMENT: $X, dynamic text)
+        var observer = new MutationObserver(function(mutations){
+            mutations.forEach(function(m){
+                m.addedNodes.forEach(function(node){
+                    if(node.nodeType === 1){
+                        var els = node.querySelectorAll ? node.querySelectorAll('div, span') : [];
+                        els.forEach(function(el){
+                            if(el.textContent.indexOf('INVESTMENT: $') !== -1){
+                                el.textContent = 'ENGAGEMENT: REQUEST SOW FOR SCOPE & PRICING';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, {childList: true, subtree: true});
+
+        // 7. Crisis/panic buttons → open calendar
+        if(typeof ManualCrisisTrigger !== 'undefined'){
+            var origMCT = ManualCrisisTrigger;
+            window.ManualCrisisTrigger = function(){
+                origMCT();
+                setTimeout(function(){ window.open(CAL, '_blank'); }, 500);
+            };
+        }
+        if(typeof CrisisDetector !== 'undefined' && CrisisDetector.activateCrisisMode){
+            var origCM = CrisisDetector.activateCrisisMode;
+            CrisisDetector.activateCrisisMode = function(){
+                origCM.call(CrisisDetector);
+                setTimeout(function(){ window.open(CAL, '_blank'); }, 500);
+            };
+        }
+
+        // 8. Kill CloserInjector typewriter pricing text
+        if(typeof CloserInjector !== 'undefined'){
+            CloserInjector.messages = [
+                "Direct to the engineer who builds your system.",
+                "Sole-source eligible. A program manager can authorize today.",
+                "Deployed for Wounded Warriors Canada. Proven results.",
+                "48-Hour Tactical Capability Prototype. You validate, then we integrate.",
+                "Security Cleared. Veteran-Owned. No intermediaries.",
+                "DDIL-Capable. Sovereign IP. Complete handoff documentation."
+            ];
+            CloserInjector.show = function(){};
+            CloserInjector.init = function(){};
+        }
+
+        // 9. Kill LossTicker B2C pressure slides — replace with defence-relevant copy
+        if(typeof LossTicker !== 'undefined'){
+            LossTicker.slides = [
+                {headline:"Estimated Cost of Delayed Capability Deployment:", context:"Manual processes in defence logistics cost 3-5x more than automated alternatives. Every quarter without modernization compounds operational debt."},
+                {headline:"Capability Gap: Manual Threat Analysis", context:"Adversarial threat detection at human speed creates response latency measured in hours. Automated systems operate in milliseconds."},
+                {headline:"Procurement Friction: Committee-Driven Timelines", context:"Average defence IT procurement cycle: 18-24 months. Sole-source rapid prototyping: 48 hours to proof of concept."},
+                {headline:"Vendor Lock-In: The Hidden Operational Cost", context:"Recurring SaaS licences and proprietary architectures create permanent dependencies. Sovereign-capable systems eliminate this risk at the architecture level."}
+            ];
+        }
+
+    })();
+    </script>
 
 </body>
 </html>
